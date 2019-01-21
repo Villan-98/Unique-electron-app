@@ -7,7 +7,7 @@ app.on('ready',()=>{
     mainWindow=new BrowserWindow({})
     //load html file
     mainWindow.loadURL(url.format({
-        pathname:path.join(__dirname,'mainWindow.html'),
+        pathname:path.join(__dirname,'public_static','mainWindow.html'),
         protocol:'file',
         slashes:true
     }))

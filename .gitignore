@@ -1,3 +1,5 @@
 node_modules/
 .idea/
 package-lock.json
+public_static/js/jquery_bootstrap/
+public_static/css/bootstrap
