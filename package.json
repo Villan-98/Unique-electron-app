@@ -1,0 +1,22 @@
+{
+  "name": "unique",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start":"electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Villan-98/Unique.git"
+  },
+  "author": "Villan-98",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Villan-98/Unique/issues"
+  },
+  "homepage": "https://github.com/Villan-98/Unique#readme",
+  "dependencies": {
+    "electron": "^4.0.1"
+  }
+}
