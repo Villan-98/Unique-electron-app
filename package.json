@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start":"electron ."
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Villan-98/Unique#readme",
   "dependencies": {
-    "electron": "^4.0.1"
+    "electron": "^4.0.1",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
   }
 }

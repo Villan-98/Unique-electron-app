@@ -7,7 +7,7 @@ $(function(){
         if(e.target.id==='addParty')
         {
             ipcRenderer.send('openNewWindow',{
-                windowName:'addParty'
+                windowName:'addParty.html'
             })
         }
     })

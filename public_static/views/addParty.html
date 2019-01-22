@@ -3,8 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Party</title>
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+
 </head>
 <body>
-You can add party here
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-center"> Add New Party</h3>
+                </div>
+            </div>
+            <form >
+
+                <div class="form-group">
+                    <label for="partyName">Party Name</label>
+                    <input type="text" class="form-control" id="partyName" placeholder="Party Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="partyAddress">Party Address</label>
+                    <input type="text" class="form-control" id="partyAddress" placeholder="Party Address">
+                </div>
+
+                <div class="form-group">
+                    <label for="partyGst">Party's GSTIN</label>
+                    <input type="text" class="form-control" id="partyGst" placeholder="Party's GSTIN">
+                </div>
+
+                <div class="form-group">
+                    <label for="contactNo">Contact No.</label>
+                    <input type="number" class="form-control" id="contactNo" placeholder="Contact N0">
+                </div>
+
+                <div class="form-group">
+                    <label for="partyName">Opening Balance</label>
+                    <input type="number" class="form-control" id="openingBalance" placeholder="Opening Balance">
+                </div>
+                <button class="btn btn-primary" id="btnSaveParty">Save Party</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/addParty.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if (window.module)
+        module = window.module;
+</script>
+
 </body>
 </html>
