@@ -35,6 +35,10 @@ const party=db.define('party',{
     }
 })
 const company=db.define('company',{
+    id:{
+      type:datatype.INTEGER,
+        primaryKey: true
+    },
     companyName:{
         type:datatype.STRING,
         defaultValue: "Ram"
@@ -61,7 +65,7 @@ const company=db.define('company',{
     },
     password:{
         type:datatype.STRING,
-        defaultValue:"acha"
+
     },
     signatory:{
         type:datatype.STRING,
@@ -74,7 +78,7 @@ const company=db.define('company',{
         type:datatype.FLOAT,
         defaultValue:0
     }
-})
+},{timestamps:false})
 db.sync({})
     .then(()=>{
         console.log("db synced")

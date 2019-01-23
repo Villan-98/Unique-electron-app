@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col">
             <h3> MY Company's Profile</h3>
-            <form >
+            <form  id="form">
                 <div class="form-group">
                     <label for="companyName">Name</label>
                     <input type="text" class="form-control" id="companyName" >
@@ -62,13 +62,24 @@
                     <input type="number" class="form-control" id="gstRate">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" class="form-control" id="oldPassword">
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="password" class="form-control" id="newPassword">
+
                 </div>
                 <div class="form-group">
                     <label for="cpassword">Confirm Password</label>
-                    <input type="number" class="form-control" id="cpassword">
+                    <input type="password" class="form-control" id="cpassword">
                 </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="chk_changePass">
+                    <label class="form-check-label" for="chk_changePass">Click on the checkbox to change password</label>
+                </div>
+
 
                 <button class="btn btn-primary" id="saveDetail">Save Detail</button>
             </form>
