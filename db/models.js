@@ -79,8 +79,19 @@ const company=db.define('company',{
         defaultValue:0
     }
 },{timestamps:false})
+const unit=db.define('unit',{
+    id:{
+        primaryKey:true,
+        type:datatype.INTEGER,
+        autoIncrement: true
+    },
+    unitName:{
+        type:datatype.STRING,
+        allowNull:false
+    }
+})
 db.sync({})
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company}
+module.exports={party,company,unit}

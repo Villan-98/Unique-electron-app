@@ -7,7 +7,11 @@ $(function(){
     $btn_addUnit.click((e)=>{
         e.preventDefault()
         ipcRenderer.send('addUnit',{
-            unitName:$unitName
+            unitName:$unitName.val()
+        })
+        console.log("ipc")
+        ipcRenderer.once('addedUnit',(event,data)=>{
+            console.log(data)
         })
 
     })
