@@ -34,8 +34,49 @@ const party=db.define('party',{
         type:datatype.BIGINT(12)
     }
 })
+const company=db.define('company',{
+    companyName:{
+        type:datatype.STRING,
+        defaultValue: "Ram"
+    },
+    companyAddress:{
+        type:datatype.STRING,
+        defaultValue:"Delhi"
+    },
+    companyGst:{
+        type:datatype.STRING,
+        defaultValue:"sljdfslk"
+    },
+    term1:{
+        type:datatype.STRING,
+    },
+    term2:{
+        type:datatype.STRING,
+    },
+    contactNo1:{
+        type:datatype.BIGINT(12),
+    },
+    contactNo2:{
+        type:datatype.BIGINT(12)
+    },
+    password:{
+        type:datatype.STRING,
+        defaultValue:"acha"
+    },
+    signatory:{
+        type:datatype.STRING,
+        defaultValue:"ram"
+    },
+    remark:{
+        type:datatype.STRING,
+    },
+    gstRate:{
+        type:datatype.FLOAT,
+        defaultValue:0
+    }
+})
 db.sync({})
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party}
+module.exports={party,company}

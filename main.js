@@ -4,7 +4,7 @@ const url =require('url')
 const {BrowserWindow,app,ipcMain}=electron
 const newWin=require('./newWin').createWin
 const db=require('./db/models')
-const routes=require('./routes/party')
+const routes=require('./routes')
 let mainWindow
 app.on('ready',()=>{
     let mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
@@ -25,4 +25,6 @@ app.on('ready',()=>{
     })
 })
 ipcMain.on('openNewWindow',newWin)
-ipcMain.on('addParty',routes.addParty)
+ipcMain.on('addParty',routes.party.addParty)
+ipcMain.on('getCompany',routes.company.getCompany)
+ipcMain.on('upsertCompany',routes.company.upsertCompany)
