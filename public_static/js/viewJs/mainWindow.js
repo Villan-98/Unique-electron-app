@@ -16,9 +16,13 @@ $(function(){
                 windowName:'addParty.html'
             })
         }
-        if(e.target.id==='myCompany')
+        else if(e.target.id==='myCompany')
         {
             openWin('myCompany.html')
+        }
+        else if(e.target.id==='unitMaster')
+        {
+            openWin('unitMaster.html')
         }
     })
 })

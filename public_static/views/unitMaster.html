@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Master</title>
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="form-group col-6">
+                <input type="text" class="form-control" id="unitName">
+            </div>
+            <div class="col-4">
+
+                <button class="btn btn-primary" id="addUnit">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    if(typeof module==='object')
+    {
+        window.module=module
+        module=undefined
+    }
+</script>
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/unitMaster.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if (window.module)
+        module = window.module;
+</script>
+</body>
+</html>
