@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Master</title>
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" id="itemName">
+                </div>
+                <div class="col-4">
+
+                    <button class="btn btn-primary" id="addItem">Add</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col">
+                <h3 class="list-group-item">Saved Item</h3>
+                <ul class="list-group" id="savedItem"></ul>
+            </div>
+        </div>
+    </div>
+<script>
+   if(typeof module==='object')
+    {
+       window.module=module
+       module=undefined
+    }
+</script>
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/itemMaster.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if (window.module)
+      module = window.module;
+</script>
+</body>
+</html>

@@ -24,5 +24,10 @@ $(function(){
         {
             openWin('unitMaster.html')
         }
+
+        else if(e.target.id==='itemMaster')
+        {
+            openWin('itemMaster.html')
+        }
     })
 })

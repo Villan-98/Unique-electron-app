@@ -90,8 +90,19 @@ const unit=db.define('unit',{
         allowNull:false
     }
 })
+const item=db.define('item',{
+    id:{
+        primaryKey:true,
+        type:datatype.INTEGER,
+        autoIncrement: true
+    },
+    itemName:{
+        type:datatype.STRING,
+        allowNull:false
+    }
+})
 db.sync({})
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company,unit}
+module.exports={party,company,unit,item}
