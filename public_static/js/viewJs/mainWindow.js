@@ -29,5 +29,9 @@ $(function(){
         {
             openWin('itemMaster.html')
         }
+        else if(e.target.id==='newInvoice')
+        {
+            openWin('newInvoice.html')
+        }
     })
 })
