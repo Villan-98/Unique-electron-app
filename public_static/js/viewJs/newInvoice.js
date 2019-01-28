@@ -5,6 +5,11 @@ $(function(){
     let $selectParticular=$('.selectParticular')
     let $selectUnit=$('.selectUnit')
     const $btnTotal=$('.btn_total')
+    const $buttonTag=$('button')
+
+
+
+
     var optionItem,optionUnit
     ipcRenderer.send('fetchParty',{})
     ipcRenderer.once('fetchedParty',(event,data)=>{
@@ -62,11 +67,11 @@ $(function(){
                             <div class="row">
 
                                 <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="No. of Colors">
+                                    <input type="number" class="form-control" placeholder="No. of Colors" id="color-${sno}">
                                 </div>
 
                                 <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="Quantity">
+                                    <input type="number" class="form-control" placeholder="Quantity" id="qty-${sno}">
                                 </div>
 
                                 <div class="col  p-0">
@@ -91,16 +96,16 @@ $(function(){
                             <input type="text" class="form-control" placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="rate">
+                            <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="amt">
+                            <input type="text" class="form-control" placeholder="amt" id="amt-${sno}">
                         </div>
                         <div class="col-2">
 
                             <div class="form-group row">
                                 <div class="col p-1">
-                                    <button class="btn btn-block btn_total" id="total1"> Total</button>
+                                    <button class="btn btn-block btn_total" id="total-${sno}"> Total</button>
                                 </div>
                                 <div class="col p-1">
                                     <button class="btn btn-alert " id="delete"> Delete</button>
@@ -115,6 +120,23 @@ $(function(){
         $('.selectParticular').empty().append(optionItem)
         $('.selectUnit').empty().append(optionUnit)
 
+    })
+    $("body").on("click",".btn_total",function(event){
+            event.preventDefault()
+            //console.log(console.log(event))
+            console.log(event.target.id)
+            let id=(event.target.id.split('-'))[1]
+            console.log(id)
+            let colors=parseInt($(`#color-${id}`).val())
+            let qty=parseInt($(`#qty-${id}`).val())
+
+            let rate=parseInt($(`#rate-${id}`).val())
+            let amt=parseInt($(`#amt-${id}`).val())
+            console.log(qty,rate,colors)
+            console.log(typeof(qty))
+            rQty=(rate*qty)
+            rColor=(rate*colors)
+            $(`#amt-${id}`).val(rQty >rColor ? rQty:rColor)
     })
 
 
