@@ -13,7 +13,7 @@ $(function(){
     var optionItem,optionUnit
     ipcRenderer.send('fetchParty',{})
     ipcRenderer.once('fetchedParty',(event,data)=>{
-        console.log(data.data)
+       // console.log(data.data)
         data=data.data
 
         data.forEach((party)=>{
@@ -23,28 +23,28 @@ $(function(){
     })
     ipcRenderer.send('getItem',{})
     ipcRenderer.once('gotItem',(event,data)=>{
-        console.log(data.data)
+        //console.log(data.data)
         data=data.data
         data.forEach((item)=>{
             optionItem+=`<option value="${item.dataValues.itemName}">${item.dataValues.itemName}</option>`
         })
 
         data.forEach((item)=>{
-            console.log(item.dataValues.itemName)
+           // console.log(item.dataValues.itemName)
             $selectParticular.append(`<option value="${item.dataValues.itemName}">${item.dataValues.itemName}</option>`)
         })
     })
     ipcRenderer.send('getUnit',{})
     ipcRenderer.once('gotUnit',(event,data)=>{
-        console.log(data.data)
+        //console.log(data.data)
     data=data.data
 
         data.forEach((Unit)=>{
-            console.log(Unit.dataValues.unitName)
+            //console.log(Unit.dataValues.unitName)
             optionUnit+=`<option value="${Unit.dataValues.unitName}">${Unit.dataValues.unitName}</option>`
         })
         data.forEach((Unit)=>{
-            console.log(Unit.dataValues.unitName)
+            //console.log(Unit.dataValues.unitName)
             $selectUnit.append(`<option value="${Unit.dataValues.unitName}">${Unit.dataValues.unitName}</option>`)
         })
 
@@ -52,7 +52,7 @@ $(function(){
 
     var sno=0
     $("body").on('click','.selectParticular',function(event){
-        console.log(`${optionItem}`)
+        //console.log(`${optionItem}`)
         
         sno++
         console.log("clicked")
@@ -60,7 +60,7 @@ $(function(){
         $('#description').append(
             `<div class="row mb " id=${sno}>
                         <div class="col-1 p-0">
-                                <select class="form-control selectParticular " name="Particular"></select>
+                                <select class="form-control selectParticular " id="particular-${sno}" name="Particular"></select>
 
                         </div>
                         <div class="col-3 p-0 ml-3">
@@ -99,7 +99,7 @@ $(function(){
                             <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="amt" id="amt-${sno}">
+                            <input type="text" class="form-control amt" placeholder="amt" id="amt-${sno}">
                         </div>
                         <div class="col-2">
 
@@ -117,26 +117,55 @@ $(function(){
 `
         )
 
-        $('.selectParticular').empty().append(optionItem)
+        $(`#particular-${sno}`).empty().append(optionItem)
         $('.selectUnit').empty().append(optionUnit)
 
     })
     $("body").on("click",".btn_total",function(event){
             event.preventDefault()
             //console.log(console.log(event))
-            console.log(event.target.id)
+            //console.log(event.target.id)
             let id=(event.target.id.split('-'))[1]
-            console.log(id)
+            //console.log(id)
             let colors=parseInt($(`#color-${id}`).val())
             let qty=parseInt($(`#qty-${id}`).val())
 
             let rate=parseInt($(`#rate-${id}`).val())
             let amt=parseInt($(`#amt-${id}`).val())
-            console.log(qty,rate,colors)
-            console.log(typeof(qty))
+            //console.log(qty,rate,colors)
+           // console.log(typeof(qty))
             rQty=(rate*qty)
             rColor=(rate*colors)
             $(`#amt-${id}`).val(rQty >rColor ? rQty:rColor)
+    })
+    $("body").on("click"," #btn_saveInvoice",function(event){
+        event.preventDefault()
+        console.log(event.target.id)
+        let grandTotal=0
+        let gstRate
+        for(i=0;i<=sno;i++)
+        {
+            let temp=parseInt($(`#amt-${i}`).val())
+            console.log(typeof(temp))
+            console.log(temp)
+            if(temp!== 'NaN')
+            {
+                
+                grandTotal+=temp
+            }
+            else{
+                console.log("empty")
+            }
+        }
+        $('#grandTotal').val(grandTotal)
+        ipcRenderer.send('getCompany',{})
+        ipcRenderer.once('gotCompany',(event,data)=>{
+            gstRate=data.data[0].dataValues.gstRate
+
+        $('#iGst').val(parseInt(gstRate)*grandTotal/200)
+        $('#cGst').val(gstRate*grandTotal/200)
+        $('#gst').val(gstRate*grandTotal/100)
+        })
     })
 
 
