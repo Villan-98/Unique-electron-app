@@ -21,6 +21,20 @@ const addParty=function(event,data){
             })
         })
 }
+const fetchParty=function(event,data){
+    party.findAll()
+        .then((data)=>{
+            event.sender.send('fetchedParty',{
+                success:true,
+                data:data
+            })
+        })
+        .catch((err)=>{
+            event.sender.send('fetchedParty',{
+                success:false
+            })
+        })
+}
 module.exports={
-    addParty
+    addParty,fetchParty
 }

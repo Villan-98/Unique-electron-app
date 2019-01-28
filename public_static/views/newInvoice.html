@@ -29,54 +29,73 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="companyName" class="col-1 col-form-label">Company Name</label>
+                        <label for="selectParty" class="col-1 col-form-label">Party Name</label>
                         <div class="col-2">
-                            <input type="text"   class="form-control"  value="email@example.com" id="companyName">
+                            <select class="form-control" id="selectParty" name="partyName"></select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="remark" class="col-1 col-form-label">Remark</label>
                         <div class="col-2">
-                            <input type="text"   class="form-control"  value="email@example.com" id="remark">
+                            <input type="text"   class="form-control" placeholder="Remark" id="remark">
                         </div>
                     </div>
 
 
 
                 </div>
-                <div class="row mt-4 ">
+                <div class="row mt-4 text-center ">
                     <div class="col-1 p-0 mr-3">
-                        <input type="text" readonly class="form-control-plaintext" value="Particular">
+                        <input type="text" readonly class="form-control-plaintext small" value="Particular">
                     </div>
-                    <div class="col-1 p-0">
+                    <div>
+
                     </div>
+                    <div class="col-1 p-0 ">
+                        <div class="row">
+                            <div class="col p-0">
+                                <input type="text" readonly class="form-control-plaintext small" value="Clr">
+                            </div>
+                            <div class="col p-0">
+
+                                <input type="text" readonly class="form-control-plaintext small" value="Qty">
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="col-1 ml-3 p-0">
-                        <input type="text" readonly class="form-control-plaintext " value="Job-type">
+                        <input type="text" readonly class="form-control-plaintext small" value="Unit">
                     </div>
 
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext" value="status">
+                        <input type="text" readonly class="form-control-plaintext small" value="Job-Type">
+                    </div>
+
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="status">
                     </div>
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext" value="Your Challan No">
+                        <input type="text" readonly class="form-control-plaintext small" value="Your Challan No">
                     </div>
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext" value="Our Challan No.">
+                        <input type="text" readonly class="form-control-plaintext small" value="Our Challan No.">
                     </div>
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext " value="rate">
+                        <input type="text" readonly class="form-control-plaintext  small" value="rate">
                     </div>
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext " value="amt">
+                        <input type="text" readonly class="form-control-plaintext small " value="amt">
                     </div>
                 </div>
 
-                <div id="description">
-                    <div class="row mb " >
-                        <div class="col-1 p-0 mr-3">
-                            <input type="text" class="form-control particular" placeholder="Particular">
-                        </div>
+                <div  id="description">
+                    <div class="row mb " id="0" >
                         <div class="col-1 p-0">
+                                <select class="form-control selectParticular " name="Particular"></select>
+
+                        </div>
+                        <div class="col-3 p-0 ml-3">
                             <div class="row">
 
                                 <div class="col p-0">
@@ -84,15 +103,22 @@
                                 </div>
 
                                 <div class="col p-0">
-                                    <input type="text" class="form-control" placeholder="Quantity">
+                                    <input type="number" class="form-control" placeholder="Quantity">
                                 </div>
+
+                                <div class="col  p-0">
+
+                                    <select class="form-control selectUnit" name="unitName"></select>
+                                </div>
+                                <div class="col  p-0">
+                                    <input type="text" class="form-control" placeholder="Job-Type">
+                                </div>
+
                             </div>
                         </div>
-                        <div class="col-1 ml-3 p-0">
-                            <input type="text" class="form-control" placeholder="Job-type">
-                        </div>
 
-                        <div class="col-1 p-0">
+
+                        <div class="col-1 ml-3 p-0">
                             <input type="text" class="form-control" placeholder="status">
                         </div>
                         <div class="col-1 p-0">
@@ -110,10 +136,10 @@
                         <div class="col-2">
 
                             <div class="form-group row">
-                                <div class="col">
-                                    <button class="btn btn-block" id="total1"> Total</button>
+                                <div class="col p-1">
+                                    <button class="btn btn-block btn_total" id="total1"> Total</button>
                                 </div>
-                                <div class="col">
+                                <div class="col p-1">
                                     <button class="btn btn-alert" id="delete"> Delete</button>
                                 </div>
                             </div>
@@ -121,8 +147,58 @@
                     </div>
 
                 </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <label for="iGst" class="col form-label">I GST</label>
+                    </div>
+                    <div class="col">
+                        <label for="cGst" class="col form-label">I CGST</label>
+                    </div>
 
-                <button class="btn btn-primary"> Save Invoice</button>
+                    <div class="col">
+                        <label for="gst" class="col form-label">Total GST</label>
+                    </div>
+                    <div class="col">
+                        <label for="grandTotal" class="col form-label">Grand Total</label> 
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col">
+                      
+                        <input type="text"  id="iGst" class="form-control" placeholder="IGST"> 
+                    </div>
+                    <div class="col">
+                        <input type="text"  id="cGst" class="form-control" placeholder="CGST"> 
+                    </div>
+
+                    <div class="col">
+                        <input type="text"  id="gst" class="form-control" placeholder="GST"> 
+                    </div>
+                    <div class="col">
+                        <input type="text"  id="grandTotal" class="form-control" placeholder="Grand Total"> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <button class="btn btn-primary"> Save Invoice</button>
+                    </div>
+
+                    <div class="col">
+
+                        <button class="btn btn-primary"> Print Invoice</button>
+                    </div>
+                    <div class="col">
+
+                        <button class="btn btn-primary"> Close</button>
+                    </div>
+                    <div class="col">
+
+                        <button class="btn btn-primary"> New Invoice</button>
+                    </div>
+
+                </div>
             </form>
         </div>
     </div>
