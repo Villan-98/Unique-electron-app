@@ -99,7 +99,7 @@ $(function(){
                             <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control amt" placeholder="amt" id="amt-${sno}">
+                            <input type="text" class="form-control amt" placeholder="amt" value=0 id="amt-${sno}">
                         </div>
                         <div class="col-2">
 
@@ -145,19 +145,10 @@ $(function(){
         let gstRate
         for(i=0;i<=sno;i++)
         {
-            let temp=parseInt($(`#amt-${i}`).val())
-            console.log(typeof(temp))
-            console.log(temp)
-            if(temp!== 'NaN')
-            {
-                
-                grandTotal+=temp
-            }
-            else{
-                console.log("empty")
-            }
+            let temp=parseInt($(`#amt-${i}`).val())           
+            grandTotal+=temp
+            
         }
-        $('#grandTotal').val(grandTotal)
         ipcRenderer.send('getCompany',{})
         ipcRenderer.once('gotCompany',(event,data)=>{
             gstRate=data.data[0].dataValues.gstRate
@@ -165,6 +156,8 @@ $(function(){
         $('#iGst').val(parseInt(gstRate)*grandTotal/200)
         $('#cGst').val(gstRate*grandTotal/200)
         $('#gst').val(gstRate*grandTotal/100)
+
+        $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
         })
     })
 
