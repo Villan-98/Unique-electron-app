@@ -158,6 +158,38 @@ $(function(){
         $('#gst').val(gstRate*grandTotal/100)
 
         $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
+
+        /****format of query to be send to the backend  ****/
+        /*ipcRenderer.send('saveInvoice',{
+            detail:{
+                gstTotal:25,
+                remark:"ajdfkl",
+                totalAmount:2500
+            },
+            description:[{
+                particular:"sdklj",
+                color:1,
+                quantity:25,
+                unit:"meter",
+                jobType:"sampling",
+                status:"redyeing",
+                yourChallanNo:"skd32",
+                ourChallanNo:"sjkldf3224",
+                rate:3,
+                amount:32},
+                {
+                    particular:"ssjdfkdsjdklj",
+                    color:1,
+                    quantity:25,
+                    unit:"meter",
+                    jobType:"production",
+                    status:"redyeafter dyeing",
+                    yourChallanNo:"skd32",
+                    ourChallanNo:"sjkldf3224",
+                    rate:3,
+                    amount:32}]
+            
+        })*/
         })
     })
 

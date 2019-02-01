@@ -156,7 +156,7 @@ const invoiceDiscription=db.define('invoiceDiscription',{
         type:datatype.STRING,
         allowNull:false
     },
-    ourChallanNO:{
+    ourChallanNo:{
         type:datatype.STRING,
         allowNull:false
     },
@@ -169,8 +169,10 @@ invoiceDetail.belongsTo(party)
 invoiceDiscription.belongsTo(invoiceDetail)
 
 
-db.sync({})
+db.sync({
+    alter:true
+})
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription}
+module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription,db}
