@@ -76,10 +76,10 @@ $(function(){
 
                                 <div class="col  p-0">
 
-                                    <select class="form-control selectUnit" name="unitName"></select>
+                                    <select class="form-control selectUnit" id="unit-${sno}" name="unitName"></select>
                                 </div>
                                 <div class="col  p-0">
-                                    <input type="text" class="form-control" placeholder="Job-Type">
+                                    <input type="text" class="form-control" id="unit-${sno}" placeholder="Job-Type">
                                 </div>
 
                             </div>
@@ -87,13 +87,13 @@ $(function(){
 
 
                         <div class="col-1 ml-3 p-0">
-                            <input type="text" class="form-control" placeholder="status">
+                            <input type="text" class="form-control" id="status-${sno} placeholder="status">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="Your Challan No">
+                            <input type="text" class="form-control" id="yourChallanNo-${sno} placeholder="Your Challan No">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="Our Challan No.">
+                            <input type="text" class="form-control" id="ourChallanNo-${sno} placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
                             <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
@@ -128,10 +128,9 @@ $(function(){
             let id=(event.target.id.split('-'))[1]
             //console.log(id)
             let colors=parseInt($(`#color-${id}`).val())
-            let qty=parseInt($(`#qty-${id}`).val())
-
-            let rate=parseInt($(`#rate-${id}`).val())
-            let amt=parseInt($(`#amt-${id}`).val())
+            let qty=parseFloat($(`#qty-${id}`).val())
+            let rate=parseFloat($(`#rate-${id}`).val())
+            let amt=parseFloat($(`#amt-${id}`).val())
             //console.log(qty,rate,colors)
            // console.log(typeof(qty))
             rQty=(rate*qty)
@@ -145,7 +144,7 @@ $(function(){
         let gstRate
         for(i=0;i<=sno;i++)
         {
-            let temp=parseInt($(`#amt-${i}`).val())           
+            let temp=parseFloat($(`#amt-${i}`).val())           
             grandTotal+=temp
             
         }
@@ -159,6 +158,46 @@ $(function(){
 
         $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
 
+        // fetching data from input boxes and drop down (assuming only an extra input box)
+        let invoiceData={detail:{
+            partyName:$(`#selectParty`).val(),
+            remark:$(`#remark`).val(),
+            invoiceDate:$(`#invoiceDate`).val(),
+            invoiceNo:$(`#invoiceNo`).val(),
+            gstTotal:parseFloat($(`#gst`).val()),
+            totalAmount:parseFloat($(`#grandTotal`).val())
+        },
+                        description:[]}
+        for( i=0;i<=sno;i++)
+        {
+            if(!$(`#rate-${i}`).val())
+            {
+                console.log(i,"sno")
+                console.log("caught")
+                break;
+            }
+            else
+            {
+                console.log(i,"sno")
+                invoiceData.description.push({
+                    particular:$(`#particular-${i}`).val(),
+                    color:parseInt($(`#color-${i}`).val()),
+                    quantity:parseFloat($(`#qty-${i}`).val()),
+                    unit:$(`#unit-${i}`).val(),
+                    jobType:$(`#jobType-${i}`).val(),
+                    status:$(`#status-${i}`).val(),
+                    yourChallanNo:$(`#yourChallanNo-${i}`).val(),
+                    ourChallanNo:$(`#ourChallanNo-${i}`).val(),
+                    rate:parseFloat($(`#rate-${i}`).val()),
+                    amount:parseInt($(`#amt-${i}`).val())
+                })
+            }
+        }
+        console.log(invoiceData)
+        ipcRenderer.send('saveInvoice',invoiceData)
+        ipcRenderer.once('invoiceSaved',function(event,data){
+            console.log(data)
+        })
         /****format of query to be send to the backend  ****/
         /*ipcRenderer.send('saveInvoice',{
             detail:{
