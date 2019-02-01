@@ -104,7 +104,6 @@ const item=db.define('item',{
 const invoiceDetail=db.define('invoiceDetail',{
     id:{
        primaryKey:true,
-       autoIncrement:true,
        type:datatype.INTEGER 
     },
     remark:{

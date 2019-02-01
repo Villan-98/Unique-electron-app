@@ -21,6 +21,17 @@ $(function(){
         })
 
     })
+    ipcRenderer.send('fetchInvoiceNo')
+    ipcRenderer.once('fetchedInvoiceNo',(event,data)=>{
+        console.log(data)
+        let invoiceId=1
+        if(data.data)
+        {
+            invoiceId=data.data.dataValues.id+1
+        }
+        console.log(data.dataValues)
+        $(`#invoiceNo`).val(invoiceId)
+    })
     ipcRenderer.send('getItem',{})
     ipcRenderer.once('gotItem',(event,data)=>{
         //console.log(data.data)
@@ -163,7 +174,7 @@ $(function(){
             partyName:$(`#selectParty`).val(),
             remark:$(`#remark`).val(),
             invoiceDate:$(`#invoiceDate`).val(),
-            invoiceNo:$(`#invoiceNo`).val(),
+            invoiceNo:parseInt($(`#invoiceNo`).val()),
             gstTotal:parseFloat($(`#gst`).val()),
             totalAmount:parseFloat($(`#grandTotal`).val())
         },
@@ -189,7 +200,8 @@ $(function(){
                     yourChallanNo:$(`#yourChallanNo-${i}`).val(),
                     ourChallanNo:$(`#ourChallanNo-${i}`).val(),
                     rate:parseFloat($(`#rate-${i}`).val()),
-                    amount:parseInt($(`#amt-${i}`).val())
+                    amount:parseInt($(`#amt-${i}`).val()),
+                    invoiceDetailId:parseInt($(`#invoiceNo`).val())
                 })
             }
         }
