@@ -101,8 +101,76 @@ const item=db.define('item',{
         allowNull:false
     }
 })
+const invoiceDetail=db.define('invoiceDetail',{
+    id:{
+       primaryKey:true,
+       autoIncrement:true,
+       type:datatype.INTEGER 
+    },
+    remark:{
+        type:datatype.STRING
+    },
+    gstTotal:{
+        type:datatype.FLOAT,
+        allowNull:false
+    },
+    totalAmount:{
+        type:datatype.FLOAT,
+        allowNull:false
+    }
+})
+const invoiceDiscription=db.define('invoiceDiscription',{
+    id:{
+        type:datatype.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    particular:{
+        type:datatype.STRING
+    },
+    color:{
+        type:datatype.INTEGER,
+        allowNull:false,
+    },
+    quantity:{
+        allowNull:false,
+        type:datatype.INTEGER,
+    },
+    unit:{
+        type:datatype.STRING,
+        allowNull:false
+    },
+    jobType:{
+        allowNull:false,
+        type:datatype.STRING
+    },
+    status:{
+        type:datatype.STRING,
+        allowNull:false,
+    },
+    rate:{
+        type:datatype.FLOAT,
+        allowNull:false
+    },
+    yourChallanNo:{
+        type:datatype.STRING,
+        allowNull:false
+    },
+    ourChallanNO:{
+        type:datatype.STRING,
+        allowNull:false
+    },
+    amount:{
+        type:datatype.FLOAT,
+        allowNull:false
+    }
+})
+invoiceDetail.belongsTo(party)
+invoiceDiscription.belongsTo(invoiceDetail)
+
+
 db.sync({})
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company,unit,item}
+module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription}
