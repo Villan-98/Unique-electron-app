@@ -71,12 +71,12 @@ $(function(){
         $('#description').append(
             `<div class="row mb " id=${sno}>
                         <div class="col-1 p-0">
-                                <select class="form-control selectParticular " id="particular-${sno}" name="Particular"></select>
-
+                                <select class="form-control selectParticular " id="particular-${sno}" name="Particular">
+                                    <option>Select Particular</option>
+                                </select>
                         </div>
                         <div class="col-3 p-0 ml-3">
                             <div class="row">
-
                                 <div class="col p-0">
                                     <input type="number" class="form-control" placeholder="No. of Colors" id="color-${sno}">
                                 </div>
@@ -87,7 +87,9 @@ $(function(){
 
                                 <div class="col  p-0">
 
-                                    <select class="form-control selectUnit" id="unit-${sno}" name="unitName"></select>
+                                    <select class="form-control selectUnit" id="unit-${sno}" name="unitName">
+                                        <option>Select Unit</option>
+                                    </select>
                                 </div>
                                 <div class="col  p-0">
                                     <input type="text" class="form-control" id="jobType-${sno}" placeholder="Job-Type">
@@ -107,10 +109,10 @@ $(function(){
                             <input type="text" class="form-control" id="ourChallanNo-${sno}" placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
+                            <input type="number" class="form-control" placeholder="rate" id="rate-${sno}">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control amt" placeholder="amt" value=0 id="amt-${sno}">
+                            <input type="number" class="form-control amt" placeholder="amt" value=0 id="amt-${sno}">
                         </div>
                         <div class="col-2">
 
@@ -128,8 +130,8 @@ $(function(){
 `
         )
 
-        $(`#particular-${sno}`).empty().append(optionItem)
-        $('.selectUnit').empty().append(optionUnit)
+        $(`#particular-${sno}`).append(optionItem)
+        $(`#unit-${sno}`).append(optionUnit)
 
     })
     $("body").on("click",".btn_total",function(event){
@@ -138,15 +140,26 @@ $(function(){
             //console.log(event.target.id)
             let id=(event.target.id.split('-'))[1]
             //console.log(id)
-            let colors=parseInt($(`#color-${id}`).val())
-            let qty=parseFloat($(`#qty-${id}`).val())
-            let rate=parseFloat($(`#rate-${id}`).val())
-            let amt=parseFloat($(`#amt-${id}`).val())
-            //console.log(qty,rate,colors)
-           // console.log(typeof(qty))
-            rQty=(rate*qty)
-            rColor=(rate*colors)
-            $(`#amt-${id}`).val(rQty >rColor ? rQty:rColor)
+            if(!$(`#color-${id}`) || !$(`#qty-${id}`).val()||!$(`#rate-${id}`).val())
+            {
+                alert("Please Fill all the input boxes")
+            }
+            else if(parseFloat($(`#rate-${id}`).val())<0 ||parseFloat($(`#qty-${id}`).val())<=0||parseFloat($(`#color-${id}`).val())<=0)
+            {
+                alert("Quantity,Color and Rate should be greater than Zero!")
+            }
+            else
+            {
+
+                let colors=parseInt($(`#color-${id}`).val())
+                let qty=parseFloat($(`#qty-${id}`).val())
+                let rate=parseFloat($(`#rate-${id}`).val())
+                //console.log(qty,rate,colors)
+            // console.log(typeof(qty))
+                rQty=(rate*qty)
+                rColor=(rate*colors)
+                $(`#amt-${id}`).val(rQty >rColor ? rQty:rColor)
+            }
     })
     $("body").on("click"," #btn_saveInvoice",function(event){
         event.preventDefault()
@@ -168,8 +181,9 @@ $(function(){
         $('#gst').val(gstRate*grandTotal/100)
 
         $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
-
+        let flag_save=0
         // fetching data from input boxes and drop down (assuming only an extra input box)
+        
         let invoiceData={detail:{
             partyName:$(`#selectParty`).val(),
             remark:$(`#remark`).val(),
@@ -181,35 +195,70 @@ $(function(){
                         description:[]}
         for( i=0;i<=sno;i++)
         {
-            if(!$(`#rate-${i}`).val())
+                // to leave last row
+            if(!$(`#rate-${i}`).val() && !$(`#qty`).val())
             {
-                console.log(i,"sno")
-                console.log("caught")
-                break;
+
+                if($(`#selectParty`).val()=='Select Party'||!$(`#invoiceDate`).val())
+                {
+                    alert("Please Select PartyName and Date")
+                    flag_save=0
+                    break;
+                }
+                 else
+                {
+                    flag_save=1;
+                    break;
+                }
             }
             else
             {
-                console.log(i,"sno")
-                invoiceData.description.push({
-                    particular:$(`#particular-${i}`).val(),
-                    color:parseInt($(`#color-${i}`).val()),
-                    quantity:parseFloat($(`#qty-${i}`).val()),
-                    unit:$(`#unit-${i}`).val(),
-                    jobType:$(`#jobType-${i}`).val(),
-                    status:$(`#status-${i}`).val(),
-                    yourChallanNo:$(`#yourChallanNo-${i}`).val(),
-                    ourChallanNo:$(`#ourChallanNo-${i}`).val(),
-                    rate:parseFloat($(`#rate-${i}`).val()),
-                    amount:parseInt($(`#amt-${i}`).val()),
-                    invoiceDetailId:parseInt($(`#invoiceNo`).val())
-                })
+                //check for empty input field
+                if($(`#particular-${i}`).val()==="Select Particular" || !$(`#color-${i}`).val()||!$(`#qty-${i}`).val()||$(`#unit-${i}`).val()==="Select Unit")
+                {
+                    console.log("caught2")
+                    alert("All input boxes in description are mandatory")
+                    flag_save=0
+                    break;
+                }
+                else if(!$(`#jobType-${i}`).val()||!$(`#status-${i}`).val()||!$(`#ourChallanNo-${i}`).val()||!$(`#amt-${i}`).val()||!$(`#invoiceNo`).val())
+                {
+                    console.log("caught3")
+                    
+                    alert("All input boxes in description are mandatory")
+                    flag_save=0;
+                    break;
+                }
+                else{
+                    console.log(i,"sno")
+                    invoiceData.description.push({
+                        particular:$(`#particular-${i}`).val(),
+                        color:parseInt($(`#color-${i}`).val()),
+                        quantity:parseFloat($(`#qty-${i}`).val()),
+                        unit:$(`#unit-${i}`).val(),
+                        jobType:$(`#jobType-${i}`).val(),
+                        status:$(`#status-${i}`).val(),
+                        yourChallanNo:$(`#yourChallanNo-${i}`).val(),
+                        ourChallanNo:$(`#ourChallanNo-${i}`).val(),
+                        rate:parseFloat($(`#rate-${i}`).val()),
+                        amount:parseInt($(`#amt-${i}`).val()),
+                        invoiceDetailId:parseInt($(`#invoiceNo`).val())
+                    })
+                }
             }
         }
-        console.log(invoiceData)
-        ipcRenderer.send('saveInvoice',invoiceData)
-        ipcRenderer.once('invoiceSaved',function(event,data){
-            console.log(data)
-        })
+        if(flag_save===1)
+        {
+            console.log(invoiceData)
+            ipcRenderer.send('saveInvoice',invoiceData)
+            ipcRenderer.once('invoiceSaved',function(event,data){
+                console.log(data.success)
+                if(data.success)
+                    alert("Invoice Saved Successfully!")
+                else
+                    alert("Oops Invoice cannot be saved !")
+            })
+        }
         /****format of query to be send to the backend  ****/
         /*ipcRenderer.send('saveInvoice',{
             detail:{
