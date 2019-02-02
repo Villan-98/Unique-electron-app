@@ -1,21 +1,28 @@
 const detail=require('../db/models').invoiceDetail
 const description=require('../db/models').invoiceDiscription
 const db=require('../db/models').db
-const Sequelize=require('sequelize')
 const createInvoice=function(event,requery){
     db.transaction(function(t){
-        return  detail.create({
+        return  detail.upsert({
             gstTotal:requery.detail.gstTotal,
             totalAmount:requery.detail.totalAmount,
             remark:requery.detail.remark,
             partyId:1,
-            id:requery.detail.invoiceNo
+            id:requery.detail.invoiceNo,
+            invoiceDate:requery.detail.invoiceDate
         },{transaction:t})        
-    .then((data)=>{
-        return description.bulkCreate(requery.description,{transaction:t})
-     })
+        .then((data)=>{
+            return description.destroy({
+                where:{
+                invoiceDetailId:requery.detail.invoiceNo
+                }
+                },{transaction:t})
+                .then((data)=>{
+                    return description.bulkCreate(requery.description,{transaction:t})
+            
+                })
+            })
     }).then((data)=>{
-        console.log(data)
         event.sender.send('invoiceSaved',{
             success:true,
             data:data,

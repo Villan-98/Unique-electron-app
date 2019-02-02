@@ -116,8 +116,11 @@ const invoiceDetail=db.define('invoiceDetail',{
     totalAmount:{
         type:datatype.FLOAT,
         allowNull:false
+    },
+    invoiceDate:{
+        type:datatype.DATEONLY
     }
-})
+},{timestamps:false})
 const invoiceDiscription=db.define('invoiceDiscription',{
     id:{
         type:datatype.INTEGER,
@@ -163,7 +166,7 @@ const invoiceDiscription=db.define('invoiceDiscription',{
         type:datatype.FLOAT,
         allowNull:false
     }
-})
+},{timestamps:false})
 invoiceDetail.belongsTo(party)
 invoiceDiscription.belongsTo(invoiceDetail)
 

@@ -90,7 +90,7 @@ $(function(){
                                     <select class="form-control selectUnit" id="unit-${sno}" name="unitName"></select>
                                 </div>
                                 <div class="col  p-0">
-                                    <input type="text" class="form-control" id="unit-${sno}" placeholder="Job-Type">
+                                    <input type="text" class="form-control" id="jobType-${sno}" placeholder="Job-Type">
                                 </div>
 
                             </div>
@@ -98,13 +98,13 @@ $(function(){
 
 
                         <div class="col-1 ml-3 p-0">
-                            <input type="text" class="form-control" id="status-${sno} placeholder="status">
+                            <input type="text" class="form-control" id="status-${sno}" placeholder="status">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" id="yourChallanNo-${sno} placeholder="Your Challan No">
+                            <input type="text" class="form-control" id="yourChallanNo-${sno}" placeholder="Your Challan No">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="text" class="form-control" id="ourChallanNo-${sno} placeholder="Our Challan No.">
+                            <input type="text" class="form-control" id="ourChallanNo-${sno}" placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
                             <input type="text" class="form-control" placeholder="rate" id="rate-${sno}">
