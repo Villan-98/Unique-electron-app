@@ -33,5 +33,9 @@ $(function(){
         {
             openWin('newInvoice.html')
         }
+        else if(e.target.id==='viewInvoice')
+        {
+            openWin('viewInvoice.html')
+        }
     })
 })

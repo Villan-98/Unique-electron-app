@@ -172,7 +172,7 @@ invoiceDiscription.belongsTo(invoiceDetail)
 
 
 db.sync({
-    alter:true
+   // alter:true
 })
     .then(()=>{
         console.log("db synced")

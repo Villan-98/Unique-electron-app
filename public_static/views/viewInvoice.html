@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Invoice</title>
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center">View Invoice</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group scrollspy-example" id='detail'>
+                    <li class="list-group-item text-center">
+                        <div class="row">
+                        <div class="col-2">
+                            Invoice No.
+                        </div>
+                        <div class="col-2">
+                            Invoice Date.
+                        </div>
+                        <div class="col-3">
+                            Party Name
+                        </div>
+                        <div class="col-1">
+                            Remark
+                        </div>
+                        <div class="col-1 ">
+                            GST
+                        </div>
+                        <div class="col-2">
+                            Grand Total
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+             </div>
+            <div class="col p-3 m-3 ">
+                <button class="btn btn-alert" id="close">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+<script>
+    if(typeof module==='object')
+    {
+            window.module=module
+            module=undefined
+    }
+ </script>
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/viewInvoice.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if(window.module   )
+        module = window.module
+</script>
+</body>
+</html>

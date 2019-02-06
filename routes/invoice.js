@@ -39,6 +39,13 @@ const createInvoice=function(event,requery){
     })
     
 }
+const getAllInvoiceDetail=function(event,data){
+    detail.findAll({
+    })
+    .then((data)=>{
+        event.sender.send('gotAllInvoiceDetail',{data:data})
+    })
+}
 const fetchInvoiceNo=function(event,data){
     detail.findOne({
         order:[['id','DESC']]
@@ -59,4 +66,4 @@ const fetchInvoiceNo=function(event,data){
     })
 }
 
-module.exports={createInvoice,fetchInvoiceNo}
+module.exports={createInvoice,fetchInvoiceNo,getAllInvoiceDetail}
