@@ -167,6 +167,17 @@ const invoiceDiscription=db.define('invoiceDiscription',{
         allowNull:false
     }
 },{timestamps:false})
+const jobType=db.define('jobType',{
+    id:{
+        type:datatype.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    type:{
+        type:datatype.STRING,
+        allowNull:false
+    }
+})
 invoiceDetail.belongsTo(party)
 invoiceDiscription.belongsTo(invoiceDetail)
 
@@ -177,4 +188,4 @@ db.sync({
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription,db}
+module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription,db,jobType}
