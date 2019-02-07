@@ -5,6 +5,10 @@ const {BrowserWindow,app,ipcMain}=electron
 const newWin=require('./newWin').createWin
 const db=require('./db/models')
 const routes=require('./routes')
+const fs=require('fs')
+const os=require('os')
+const shell =electron.shell
+
 let mainWindow
 app.on('ready',()=>{
     let mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
@@ -38,3 +42,22 @@ ipcMain.on('fetchInvoiceNo',routes.invoice.fetchInvoiceNo)
 ipcMain.on('getAllInvoiceDetail',routes.invoice.getAllInvoiceDetail)
 ipcMain.on('createJobType',routes.jobType_status.createJobType)
 ipcMain.on('fetchJobType',routes.jobType_status.fetchJobType)
+ipcMain.on('fetchGivenInvoice',routes.invoice.fetchGivenInvoice)
+
+ipcMain.on('printPdf',function(event){
+    const pdfPath=path.join(os.tmpdir(),'printPdf')
+    const win=BrowserWindow.fromWebContents(event.sender)
+    win.webContents.printToPDF({},function(error,data){
+        if(error){
+            return console.log(error)
+        }
+        fs.writeFile(pdfPath,data,function(error){
+            if(error)
+            {
+                return console.log(error.message)
+            }
+            shell.openExternal('file://'+pdfPath)
+            event.sender.send('wrotePdf',pdfPath)
+        })
+    })
+})

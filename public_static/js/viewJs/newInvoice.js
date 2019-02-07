@@ -6,9 +6,25 @@ $(function(){
     let $selectUnit=$('.selectUnit')
     const $btnTotal=$('.btn_total')
     const $buttonTag=$('button')
+    let printFlag=0
 
-
-
+    $buttonTag.click((event)=>{
+        event.preventDefault()
+        if(event.target.id==='btn_printInvoice')
+        {
+             if(printFlag===0)
+             {
+                alert("Please save invoice first!")
+             }  
+             else{
+                ipcRenderer.send('openNewWindow',{
+                    windowName:'printWindow.html',
+                    invoiceNo:$(`#invoiceNo`).val(),
+                    task:"printInvoice"
+                }) 
+             }
+        }
+    })
 
     var optionItem,optionUnit
     ipcRenderer.send('fetchParty',{})
@@ -136,6 +152,7 @@ $(function(){
     })
     $("body").on("click",".btn_total",function(event){
             event.preventDefault()
+            printFlag=0
             //console.log(console.log(event))
             //console.log(event.target.id)
             let id=(event.target.id.split('-'))[1]
@@ -254,7 +271,11 @@ $(function(){
             ipcRenderer.once('invoiceSaved',function(event,data){
                 console.log(data.success)
                 if(data.success)
+                {
+
                     alert("Invoice Saved Successfully!")
+                    printFlag=1;
+                }
                 else
                     alert("Oops Invoice cannot be saved !")
             })

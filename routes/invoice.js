@@ -67,5 +67,44 @@ const fetchInvoiceNo=function(event,data){
          })  
     })
 }
-
-module.exports={createInvoice,fetchInvoiceNo,getAllInvoiceDetail}
+const fetchGivenInvoice=function(event,data){
+    console.log("route",data)
+    detail.find({
+        where:{
+            id:data.invoiceDetailId
+        },
+        include:[{model:party}]
+    })
+    .then(detailData=>{
+        console.log("detail")
+        
+        description.findAll({
+            where:{
+                invoiceDetailId:data.invoiceDetailId
+            }
+        })
+        .then(discriptionData=>{
+                //console.log(discription)
+                //console.log(detail)
+                data={
+                    detail:detailData,
+                    description:discriptionData
+                }
+                event.sender.send('fetchedGivenInvoice',{
+                    data:data,
+                    success:"lkdjf",
+                    error:null
+                })
+            
+        })
+        .catch(err=>{
+            console.log(err)
+            event.sender.send('fetchedGivenInvoice',{
+                data:null,
+                error:err,
+                success:"sdklfj"
+            })
+        })
+    })
+}
+module.exports={createInvoice,fetchInvoiceNo,getAllInvoiceDetail,fetchGivenInvoice}

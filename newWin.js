@@ -30,5 +30,13 @@ const createWin=function(e,data){
         protocol:'file:',
         slashes:true
     }))
+    console.log(data.invoiceNo)
+    if(data.invoiceNo)
+    {
+        newWin.webContents.on('did-finish-load', () => {
+            console.log("skdfja")
+            newWin.webContents.send('takeInvoiceNo',data.invoiceNo)
+          })
+    }
 }
 module.exports={createWin}

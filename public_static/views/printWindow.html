@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Invoice</title>
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1" id="invoiceDetail">
+                    <button id="printInvoice"></button>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col" id="header">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="body">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="footer">
+
+            </div>
+        </div>
+    </div>
+<script>
+    if(typeof module==='object')
+    {
+            window.module=module
+            module=undefined
+    }
+    </script>
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/printInvoice.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if(window.module   )
+        module = window.module
+</script>
+</body>
+</html>
