@@ -10,6 +10,7 @@ $(function(){
         let gst=0;
         let total=0;
         data.data.forEach((data)=>{
+            //console.log(data)
             data=data.dataValues
             gst+=data.gstTotal
             total+=data.totalAmount
@@ -23,7 +24,7 @@ $(function(){
                             ${data.invoiceDate}
                         </div>
                         <div class="col-3">
-                            ${data.partyId}
+                            ${data.party.dataValues.partyName}
                         </div>
                         <div class="col-1">
                             ${data.remark}

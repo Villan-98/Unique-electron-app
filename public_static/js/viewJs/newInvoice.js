@@ -17,7 +17,7 @@ $(function(){
         data=data.data
 
         data.forEach((party)=>{
-            $selectParty.append(`<option value="${party.dataValues.partyName}">${party.dataValues.partyName}</option>`)
+            $selectParty.append(`<option value="${party.dataValues.id}">${party.dataValues.partyName}</option>`)
         })
 
     })
@@ -183,9 +183,9 @@ $(function(){
         $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
         let flag_save=0
         // fetching data from input boxes and drop down (assuming only an extra input box)
-        
+        console.log("party val",$(`#selectParty`).val())
         let invoiceData={detail:{
-            partyName:$(`#selectParty`).val(),
+            partyId:$(`#selectParty`).val(),
             remark:$(`#remark`).val(),
             invoiceDate:$(`#invoiceDate`).val(),
             invoiceNo:parseInt($(`#invoiceNo`).val()),

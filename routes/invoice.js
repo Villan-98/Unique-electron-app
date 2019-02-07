@@ -1,13 +1,14 @@
 const detail=require('../db/models').invoiceDetail
 const description=require('../db/models').invoiceDiscription
 const db=require('../db/models').db
+const party=require('../db/models').party
 const createInvoice=function(event,requery){
     db.transaction(function(t){
         return  detail.upsert({
             gstTotal:requery.detail.gstTotal,
             totalAmount:requery.detail.totalAmount,
             remark:requery.detail.remark,
-            partyId:1,
+            partyId:requery.detail.partyId,
             id:requery.detail.invoiceNo,
             invoiceDate:requery.detail.invoiceDate
         },{transaction:t})        
@@ -41,6 +42,7 @@ const createInvoice=function(event,requery){
 }
 const getAllInvoiceDetail=function(event,data){
     detail.findAll({
+    include:[{model:party}]
     })
     .then((data)=>{
         event.sender.send('gotAllInvoiceDetail',{data:data})
