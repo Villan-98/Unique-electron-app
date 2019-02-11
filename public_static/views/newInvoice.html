@@ -50,20 +50,11 @@
                     <div class="col-1 p-0 mr-3">
                         <input type="text" readonly class="form-control-plaintext small" value="Particular">
                     </div>
-                    <div>
-
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Clr">
                     </div>
-                    <div class="col-1 p-0 ">
-                        <div class="row">
-                            <div class="col p-0">
-                                <input type="text" readonly class="form-control-plaintext small" value="Clr">
-                            </div>
-                            <div class="col p-0">
-
-                                <input type="text" readonly class="form-control-plaintext small" value="Qty">
-                            </div>
-
-                        </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Qty">
                     </div>
 
                     <div class="col-1 ml-3 p-0">
@@ -71,20 +62,19 @@
                     </div>
 
                     <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext small" value="Job-Type">
-                    </div>
-
-                    <div class="col-1 p-0">
-                        <input type="text" readonly class="form-control-plaintext small" value="status">
-                    </div>
-                    <div class="col-1 p-0">
                         <input type="text" readonly class="form-control-plaintext small" value="Your Challan No">
                     </div>
                     <div class="col-1 p-0">
                         <input type="text" readonly class="form-control-plaintext small" value="Our Challan No.">
                     </div>
                     <div class="col-1 p-0">
+                        <input type="text" class="form-control-plaintext small"value="HSN Code">   
+                    </div>
+                    <div class="col-1 p-0">
                         <input type="text" readonly class="form-control-plaintext  small" value="rate">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="PerQty/Clr">
                     </div>
                     <div class="col-1 p-0">
                         <input type="text" readonly class="form-control-plaintext small " value="amt">
@@ -92,39 +82,25 @@
                 </div>
 
                 <div  id="description">
-                    <div class="row mb " id="0" >
+                    <div class="row mb-2 " id="0" >
                         <div class="col-1 p-0">
                                 <select class="form-control selectParticular " id="particular-0" name="Particular">
                                     <option value="Select Particular">Select Particular</option>
                                 </select>
                         </div>
-                        <div class="col-3 p-0 ml-3">
-                            <div class="row">
 
-                                <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="No. of Colors" id="color-0">
-                                </div>
-
-                                <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="Quantity" id="qty-0">
-                                </div>
-
-                                <div class="col  p-0">
-
-                                    <select class="form-control selectUnit" id="unit-0" name="unitName">
-                                        <option >Select Unit</option>
-                                    </select>
-                                </div>
-                                <div class="col  p-0">
-                                    <input type="text" class="form-control" id="jobType-0"  placeholder="Job-Type">
-                                </div>
-                                
-                            </div>
+                        <div class="col-1 p-0">
+                            <input type="number" class="form-control" placeholder="No. of Colors" id="color-0">
+                        </div>
+                        <div class="col-1 p-0">
+                            <input type="number" class="form-control" placeholder="Quantity" id="qty-0">
                         </div>
 
+                        <div class="col-1  p-0">
 
-                        <div class="col-1 ml-3 p-0">
-                            <input type="text" class="form-control" id="status-0" placeholder="status">
+                            <select class="form-control selectUnit" id="unit-0" name="unitName">
+                                <option >Select Unit</option>
+                            </select>
                         </div>
                         <div class="col-1 p-0">
                             <input type="text" class="form-control" id="yourChallanNo-0" placeholder="Your Challan No">
@@ -133,26 +109,38 @@
                             <input type="text" class="form-control" id="ourChallanNo-0" placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
+                            <div class="col pl-0">
+                                <input type="text" class="form-control" id="hsnCode-0" placeholder="HSN Code">
+                            </div>
+                        </div>
+                        <div class="col-1 p-0">
                             <input type="number" class="form-control" id="rate-0" placeholder="rate">
                         </div>
                         <div class="col-1 p-0">
+                            <input type="text" class="form-control" id="perClrQty-0" placeholder="Per Qty/Clr">
+                        </div>
+                        <div class="col-1 pl-0">
                             <input type="number" class="form-control amt"  placeholder="amt" value=0 id="amt-0">
                         </div>
-                        <div class="col-2">
 
-                            <div class="form-group row">
-                                <div class="col p-1">
+                        <div class="col-2 ">
+                            <div class="row">
+                                <div class="col-2">
+                                    <input type="checkbox" class="form-check-input" id="check-0">
+                                </div>
+                                <div class="col">
                                     <button class="btn btn-block btn_total" id="total-0"> Total</button>
                                 </div>
-                                <div class="col p-1">
-                                    <button class="btn btn-alert" id="delete"> Delete</button>
-                                </div>
                             </div>
-                        </div>
+                        </div>                       
+
                     </div>
 
                 </div>
-                <div class="row text-center">
+                <div class="row text-center pt-3">
+                    <div class="col ">
+                        <label for="conveyanceCharge" class="col form-label">Conveyance Charge</label>
+                    </div>
                     <div class="col">
                         <label for="iGst" class="col form-label">I GST</label>
                     </div>
@@ -170,18 +158,21 @@
 
                 <div class="row mb-5">
                     <div class="col">
-                      
-                        <input type="text"  id="iGst" class="form-control" placeholder="IGST"> 
+                
+                        <input type="number"  id="conveyanceCharge" class="form-control" value=0 placeholder="Conveyance Charge"> 
                     </div>
                     <div class="col">
-                        <input type="text"  id="cGst" class="form-control" placeholder="CGST"> 
+                        <input type="number"  id="iGst" class="form-control" placeholder="IGST"> 
+                    </div>
+                    <div class="col">
+                        <input type="number"  id="cGst" class="form-control" placeholder="CGST"> 
                     </div>
 
                     <div class="col">
-                        <input type="text"  id="gst" class="form-control" placeholder="GST"> 
+                        <input type="number"  id="gst" class="form-control" placeholder="GST"> 
                     </div>
                     <div class="col">
-                        <input type="text"  id="grandTotal" class="form-control" placeholder="Grand Total"> 
+                        <input type="number"  id="grandTotal" class="form-control" placeholder="Grand Total"> 
                     </div>
                 </div>
                 <div class="row">

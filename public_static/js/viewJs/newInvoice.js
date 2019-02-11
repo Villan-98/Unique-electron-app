@@ -6,6 +6,7 @@ $(function(){
     let $selectUnit=$('.selectUnit')
     const $btnTotal=$('.btn_total')
     const $buttonTag=$('button')
+    const $inputTag=$('input')
     let printFlag=0
 
     $buttonTag.click((event)=>{
@@ -85,38 +86,26 @@ $(function(){
         console.log("clicked")
       //  console.log(event)
         $('#description').append(
-            `<div class="row mb " id=${sno}>
+                    `
+                    <div class="row mb-1" id=${sno} >
                         <div class="col-1 p-0">
                                 <select class="form-control selectParticular " id="particular-${sno}" name="Particular">
-                                    <option>Select Particular</option>
+                                    <option value="Select Particular">Select Particular</option>
                                 </select>
                         </div>
-                        <div class="col-3 p-0 ml-3">
-                            <div class="row">
-                                <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="No. of Colors" id="color-${sno}">
-                                </div>
 
-                                <div class="col p-0">
-                                    <input type="number" class="form-control" placeholder="Quantity" id="qty-${sno}">
-                                </div>
-
-                                <div class="col  p-0">
-
-                                    <select class="form-control selectUnit" id="unit-${sno}" name="unitName">
-                                        <option>Select Unit</option>
-                                    </select>
-                                </div>
-                                <div class="col  p-0">
-                                    <input type="text" class="form-control" id="jobType-${sno}" placeholder="Job-Type">
-                                </div>
-
-                            </div>
+                        <div class="col-1 p-0">
+                            <input type="number" class="form-control" placeholder="No. of Colors" id="color-${sno}">
+                        </div>
+                        <div class="col-1 p-0">
+                            <input type="number" class="form-control" placeholder="Quantity" id="qty-${sno}">
                         </div>
 
+                        <div class="col-1  p-0">
 
-                        <div class="col-1 ml-3 p-0">
-                            <input type="text" class="form-control" id="status-${sno}" placeholder="status">
+                            <select class="form-control selectUnit" id="unit-${sno}" name="unitName">
+                                <option >Select Unit</option>
+                            </select>
                         </div>
                         <div class="col-1 p-0">
                             <input type="text" class="form-control" id="yourChallanNo-${sno}" placeholder="Your Challan No">
@@ -125,25 +114,35 @@ $(function(){
                             <input type="text" class="form-control" id="ourChallanNo-${sno}" placeholder="Our Challan No.">
                         </div>
                         <div class="col-1 p-0">
-                            <input type="number" class="form-control" placeholder="rate" id="rate-${sno}">
+                            <div class="col pl-0">
+                                <input type="text" class="form-control" id="hsnCode-${sno}" placeholder="HSN Code">
+                            </div>    
                         </div>
                         <div class="col-1 p-0">
-                            <input type="number" class="form-control amt" placeholder="amt" value=0 id="amt-${sno}">
+                            <input type="number" class="form-control" id="rate-${sno}" placeholder="rate">
                         </div>
-                        <div class="col-2">
 
-                            <div class="form-group row">
-                                <div class="col p-1">
+                        <div class="col-1 p-0">
+                            <input type="text" class="form-control" id="perClrQty-${sno}" placeholder="Per Qty/Clr">
+                        </div>
+                        <div class="col-1 pl-0">
+                            <input type="number" class="form-control amt"  placeholder="amt" value=0 id="amt-${sno}">
+                        </div>
+
+                        <div class="col-2 ">
+                            <div class="row">
+                                <div class="col-2">
+                                    <input type="checkbox" class="form-check-input" id="check-${sno}">
+                                </div>
+                                <div class="col">
                                     <button class="btn btn-block btn_total" id="total-${sno}"> Total</button>
                                 </div>
-                                <div class="col p-1">
-                                    <button class="btn btn-alert " id="delete"> Delete</button>
-                                </div>
                             </div>
-                        </div>
+                        </div>                       
+
                     </div>
 
-`
+                    `
         )
 
         $(`#particular-${sno}`).append(optionItem)
@@ -157,9 +156,11 @@ $(function(){
             //console.log(event.target.id)
             let id=(event.target.id.split('-'))[1]
             //console.log(id)
-            if(!$(`#color-${id}`) || !$(`#qty-${id}`).val()||!$(`#rate-${id}`).val())
+            console.log()
+            if(!$(`#color-${id}`).val() || !$(`#qty-${id}`).val()||!$(`#rate-${id}`).val())
             {
                 alert("Please Fill all the input boxes")
+                console.log("hi")
             }
             else if(parseFloat($(`#rate-${id}`).val())<0 ||parseFloat($(`#qty-${id}`).val())<=0||parseFloat($(`#color-${id}`).val())<=0)
             {
@@ -171,33 +172,42 @@ $(function(){
                 let colors=parseInt($(`#color-${id}`).val())
                 let qty=parseFloat($(`#qty-${id}`).val())
                 let rate=parseFloat($(`#rate-${id}`).val())
-                //console.log(qty,rate,colors)
-            // console.log(typeof(qty))
-                rQty=(rate*qty)
-                rColor=(rate*colors)
-                $(`#amt-${id}`).val(rQty >rColor ? rQty:rColor)
+                let checkbox=$(`#check-${id}`)
+                if(checkbox.is(":checked"))
+                {
+
+                    $(`#amt-${id}`).val(colors*rate)
+                    $(`#perClrQty-${id}`).val("Per Color")
+                }
+                else{
+                    if($(`#unit-${id}`).val()==='Select Unit')
+                    alert("Please Select Unit")
+                    $(`#amt-${id}`).val(qty*rate)
+                    $(`#perClrQty-${id}`).val("Per "+$(`#unit-${id}`).val())
+                }
             }
     })
     $("body").on("click"," #btn_saveInvoice",function(event){
         event.preventDefault()
         console.log(event.target.id)
-        let grandTotal=0
+        let total=0
         let gstRate
+        let conveyanceCharge=parseFloat($(`#conveyanceCharge`).val())
         for(i=0;i<=sno;i++)
         {
             let temp=parseFloat($(`#amt-${i}`).val())           
-            grandTotal+=temp
+            total+=temp
             
         }
+        total+=conveyanceCharge
         ipcRenderer.send('getCompany',{})
         ipcRenderer.once('gotCompany',(event,data)=>{
             gstRate=data.data[0].dataValues.gstRate
 
-        $('#iGst').val(parseInt(gstRate)*grandTotal/200)
-        $('#cGst').val(gstRate*grandTotal/200)
-        $('#gst').val(gstRate*grandTotal/100)
-
-        $('#grandTotal').val(grandTotal+gstRate*grandTotal/100)
+        $('#iGst').val(parseInt(gstRate)*total/200)
+        $('#cGst').val(gstRate*total/200)
+        $('#gst').val(gstRate*total/100)
+        $('#grandTotal').val(total+gstRate*total/100+conveyanceCharge)
         let flag_save=0
         // fetching data from input boxes and drop down (assuming only an extra input box)
         console.log("party val",$(`#selectParty`).val())
@@ -207,7 +217,9 @@ $(function(){
             invoiceDate:$(`#invoiceDate`).val(),
             invoiceNo:parseInt($(`#invoiceNo`).val()),
             gstTotal:parseFloat($(`#gst`).val()),
-            totalAmount:parseFloat($(`#grandTotal`).val())
+            totalAmount:parseFloat($(`#grandTotal`).val()),
+            conveyanceCharge:parseFloat($(`#conveyanceCharge`).val())
+            
         },
                         description:[]}
         for( i=0;i<=sno;i++)
@@ -231,6 +243,11 @@ $(function(){
             else
             {
                 //check for empty input field
+                console.log("sdfjkljskdljflk")
+                console.log($(`#particular-${i}`).val())
+                console.log($(`#color-${i}`).val())
+                console.log($(`#qty-${i}`).val())
+                console.log($(`#unit-${i}`).val())
                 if($(`#particular-${i}`).val()==="Select Particular" || !$(`#color-${i}`).val()||!$(`#qty-${i}`).val()||$(`#unit-${i}`).val()==="Select Unit")
                 {
                     console.log("caught2")
@@ -238,7 +255,7 @@ $(function(){
                     flag_save=0
                     break;
                 }
-                else if(!$(`#jobType-${i}`).val()||!$(`#status-${i}`).val()||!$(`#ourChallanNo-${i}`).val()||!$(`#amt-${i}`).val()||!$(`#invoiceNo`).val())
+                else if(!$(`#ourChallanNo-${i}`).val()||!$(`#amt-${i}`).val()||!$(`#invoiceNo`).val())
                 {
                     console.log("caught3")
                     
@@ -253,13 +270,13 @@ $(function(){
                         color:parseInt($(`#color-${i}`).val()),
                         quantity:parseFloat($(`#qty-${i}`).val()),
                         unit:$(`#unit-${i}`).val(),
-                        jobType:$(`#jobType-${i}`).val(),
-                        status:$(`#status-${i}`).val(),
+                        perClrQty:$(`#perClrQty-${i}`).val(),
                         yourChallanNo:$(`#yourChallanNo-${i}`).val(),
                         ourChallanNo:$(`#ourChallanNo-${i}`).val(),
                         rate:parseFloat($(`#rate-${i}`).val()),
                         amount:parseInt($(`#amt-${i}`).val()),
-                        invoiceDetailId:parseInt($(`#invoiceNo`).val())
+                        invoiceDetailId:parseInt($(`#invoiceNo`).val()),
+                        hsnCode:$(`#hsnCode-${i}`).val()
                     })
                 }
             }

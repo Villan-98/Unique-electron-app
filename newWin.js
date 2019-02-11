@@ -35,7 +35,7 @@ const createWin=function(e,data){
     {
         newWin.webContents.on('did-finish-load', () => {
             console.log("skdfja")
-            newWin.webContents.send('takeInvoiceNo',data.invoiceNo)
+            newWin.webContents.send('takeInvoiceNo')
           })
     }
 }

@@ -119,6 +119,10 @@ const invoiceDetail=db.define('invoiceDetail',{
     },
     invoiceDate:{
         type:datatype.DATEONLY
+    },
+    conveyanceCharge:{
+        type:datatype.INTEGER,
+        defaultValue:0
     }
 },{timestamps:false})
 const invoiceDiscription=db.define('invoiceDiscription',{
@@ -136,19 +140,18 @@ const invoiceDiscription=db.define('invoiceDiscription',{
     },
     quantity:{
         allowNull:false,
-        type:datatype.INTEGER,
+        type:datatype.FLOAT,
     },
     unit:{
         type:datatype.STRING,
         allowNull:false
     },
-    jobType:{
+    perClrQty:{
         allowNull:false,
         type:datatype.STRING
     },
-    status:{
+    hsnCode:{
         type:datatype.STRING,
-        allowNull:false,
     },
     rate:{
         type:datatype.FLOAT,
@@ -183,7 +186,7 @@ invoiceDiscription.belongsTo(invoiceDetail)
 
 
 db.sync({
-   // alter:true
+    alter:true
 })
     .then(()=>{
         console.log("db synced")

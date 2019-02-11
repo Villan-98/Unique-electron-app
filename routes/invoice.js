@@ -4,13 +4,15 @@ const db=require('../db/models').db
 const party=require('../db/models').party
 const createInvoice=function(event,requery){
     db.transaction(function(t){
+        console.log(requery)
         return  detail.upsert({
             gstTotal:requery.detail.gstTotal,
             totalAmount:requery.detail.totalAmount,
             remark:requery.detail.remark,
             partyId:requery.detail.partyId,
             id:requery.detail.invoiceNo,
-            invoiceDate:requery.detail.invoiceDate
+            invoiceDate:requery.detail.invoiceDate,
+            conveyanceCharge:requery.detail.conveyanceCharge
         },{transaction:t})        
         .then((data)=>{
             return description.destroy({
