@@ -75,6 +75,10 @@ $(function(){
                 updateList(modalList,data) 
             })
         }
+        else if(e.target.id==='transaction')
+        {
+            openWin('transaction.html')
+        }
     })
 })
 const updateList=function(List,data)
