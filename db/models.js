@@ -181,14 +181,36 @@ const jobType=db.define('jobType',{
         allowNull:false
     }
 })
+const transaction=db.define('transaction',{
+    id:{
+        type:datatype.INTEGER,
+        allowNull:false,
+        primaryKey:true,
+        autoIncrement:true
+    },
+    transactionMode:{
+        type:datatype.STRING,
+        allowNull:false,
+        primaryKey:true
+    },
+    amount:{
+        type:datatype.FLOAT,
+        allowNull:false,
+    },
+    transactionDate:{
+        type:datatype.DATEONLY,
+        allowNull:false
+    }
+
+})
 invoiceDetail.belongsTo(party)
 invoiceDiscription.belongsTo(invoiceDetail)
 
-
+transaction.belongsTo(party)
 db.sync({
-    alter:true
+    //alter:true
 })
     .then(()=>{
         console.log("db synced")
     })
-module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription,db,jobType}
+module.exports={party,company,unit,item,invoiceDetail,invoiceDiscription,db,jobType,transaction}

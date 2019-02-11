@@ -22,9 +22,9 @@
 
                 <div class="form-group">
                     <label for="partyName">Party Name</label>
-                    <select class="form-control" id="partyName">
-                        <option value="Select Party">Select Party</option>
-                        </select>
+                    <select class="form-control" id="partyId">
+                        <option value="-1">Select Party</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="paymentMethod">Payment Method</label>
-                    <select class="form-control" id="paymentMethod">
+                    <label for="paymentMethod">Payment Mode</label>
+                    <select class="form-control" id="paymentMode">
                         <option value="Select Payment Method">Select Payment Method</option>
                         <option value="cheque">Cheque</option>
                         <option value="debit">Debit</option>
@@ -43,8 +43,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="contactNo">Contact No.</label>
-                    <input type="number" class="form-control" id="paymentAmount" value=0 placeholder="Payment Amount">
+                    <label for="contactNo">Amount.</label>
+                    <input type="number" class="form-control" id="amount" placeholder="Payment Amount">
+                </div>
+                <div class="form-group">
+                    <label for="remark">Remark</label>
+                    <input type="text" class="form-control" id="remark"  placeholder="Remark">
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -52,7 +56,10 @@
                             <button class="btn btn-primary" id="btnSave">Save</button>
                         </div>
                         <div class="col">
-                            <button class="btn btn-alert" id="btnClose">Close</button>
+                            <button class="btn btn-warning" id="btnClose">Close</button>
+                       </div>
+                       <div class="col">
+                            <button class="btn btn-success" id="btnNewTransaction">New Transaction</button>
                        </div>
                     </div>
                 </div>

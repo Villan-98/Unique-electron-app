@@ -43,6 +43,7 @@ ipcMain.on('getAllInvoiceDetail',routes.invoice.getAllInvoiceDetail)
 ipcMain.on('createJobType',routes.jobType_status.createJobType)
 ipcMain.on('fetchJobType',routes.jobType_status.fetchJobType)
 ipcMain.on('fetchGivenInvoice',routes.invoice.fetchGivenInvoice)
+ipcMain.on('createNewTransaction',routes.transaction.newTransaction)
 
 ipcMain.on('printPdf',function(event){
     const pdfPath=path.join(os.tmpdir(),'printPdf')
