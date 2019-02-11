@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="row p-4">
+                <div class="col">
+                    <h3 class="text-center">Party Wise Report</h3>
+                </div>
+            </div>
+            <form >
+                <div class="row form-group py-3">
+                    <div class="col">
+                        <label for="partyName text-center">Party Name</label>
+                        <select class="form-control" id="partyId">
+                            <option value="-1">Select Party</option>
+                        </select>
+                    </div>
+                </div>   
+                <div class="row form-group py-3">
+                    <div class="col">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="endDate">End Date</label>
+                        <input id="endDate"type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group py-3">
+                        <div class="col">
+                            <label for="partyName text-center">Report Type</label>
+                            <select class="form-control" id="reportType">
+                                <option value="-1">Report Type</option>
+                                <option value="Payment Only">Payment Only</option>
+                                <option value="Invoice Only">Invoice All</option>
+                                <option value="Report All">Report All</option>
+                            </select>
+                        </div>
+                    </div>
+                <div class="form-group py-3">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-warning" id="close">Close</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success" id="refresh">Refresh</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/report.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+    if (window.module)
+        module = window.module;
+</script>
+
+</body>
+</html>

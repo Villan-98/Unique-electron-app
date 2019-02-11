@@ -79,6 +79,10 @@ $(function(){
         {
             openWin('transaction.html')
         }
+        else if(e.target.id==='report')
+        {
+            openWin('report.html')
+        }
     })
 })
 const updateList=function(List,data)
