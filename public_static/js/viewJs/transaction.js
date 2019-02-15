@@ -9,6 +9,7 @@ $(function(){
     const $partyId=$(`#partyId`)
     const $remark=$(`#remark`)
     const $paymentDate=$(`#paymentDate`)
+    const $CDNo=$('#CDNo')
     ipcRenderer.send('fetchParty')
     ipcRenderer.once('fetchedParty',(event,data)=>{
         // console.log(data.data)
@@ -36,7 +37,8 @@ $(function(){
                     amount:parseFloat($amount.val()),
                     remark:$remark.val(),
                     transactionDate:$paymentDate.val(),
-                    transactionMode:$paymentMode.val()
+                    transactionMode:$paymentMode.val(),
+                    CDNo:$CDNo.val()
                 })
 
                 ipcRenderer.once('newTransactionCreated',(event,data)=>{

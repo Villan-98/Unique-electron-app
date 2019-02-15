@@ -7,7 +7,8 @@ const newTransaction=function(event,requery){
         amount:requery.amount,
         remark:requery.remark,
         transactionDate:requery.transactionDate,
-        transactionMode:requery.transactionMode
+        transactionMode:requery.transactionMode,
+        CDNo:requery.CDNo
     })
     .then((data)=>{
        // console.log(data)

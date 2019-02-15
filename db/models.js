@@ -193,6 +193,9 @@ const transaction=db.define('transaction',{
         allowNull:false,
         primaryKey:true
     },
+    CDNo:{
+        type:datatype.STRING,
+    },
     amount:{
         type:datatype.FLOAT,
         allowNull:false,

@@ -120,9 +120,10 @@ $(function(){
                     <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col" class="text-center">Sno.</th>
+                            <th scope="col" class="text-center">Cheque/DebitNo.</th>
                             <th scope="col" class="text-center">Payment Date</th>
                             <th scope="col" class="text-center">Payment Mode</th>
+                            <th scope="col" class="text-center">Cheque/DebitNo.</th>
                             <th scope="col" class="text-center">Remark</th>
                             <th scope="col" class="text-right">Amount</th> 
                             </tr>
@@ -142,9 +143,9 @@ $(function(){
             totalPayment+=detail.amount
             $('#paymentReportTable').append(`
             <tr>
-                <th class="text-center py-2" scope="row">${detail.id}</th>
-                <td class="text-center py-2">${detail.transactionDate}</td>
+                <td class="text-center py-2"  scope="row">${detail.transactionDate}</td>
                 <td class="text-center py-2">${detail.transactionMode}</td>
+                <th class="text-center py-2">${detail.CDNo}</th>
                 <td class="text-center py-2">${detail.remark}</td>
                 <td class="text-right py-2">${(detail.amount).toFixed(2)}</td>
             </tr>
