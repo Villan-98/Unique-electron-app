@@ -30,13 +30,13 @@ const createWin=function(e,data){
         protocol:'file:',
         slashes:true
     }))
-    console.log(data.invoiceNo)
-    if(data.invoiceNo)
-    {
+    console.log("new window")
+        console.log(data.task)
         newWin.webContents.on('did-finish-load', () => {
             console.log("skdfja")
-            newWin.webContents.send('takeInvoiceNo')
+            console.log(data.invoiceNo)
+            newWin.webContents.send('takeInvoiceNo',`${data.task}-${data.invoiceNo}`)
           })
-    }
+    
 }
 module.exports={createWin}

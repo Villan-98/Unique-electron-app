@@ -35,6 +35,35 @@ const fetchParty=function(event,data){
             })
         })
 }
+const givenParty=function(event,data){
+    party.findOne({
+        where:{
+            id:data.partyId
+        }
+    })
+    .then((data)=>{
+        event.sender.send('fetchedGivenParty',{
+            data:data,
+            success:true,
+            error:null
+        })
+    })
+    .catch((err)=>{
+        event.sender.send('fetchedGivenParty',{
+            data:null,
+            success:false,
+            error:err
+        })
+    })
+}
+/*for Report.Js*/
+const getGivenParty=function(requery){
+   return party.findOne({
+        where:{
+            id:requery.partyId
+        }
+    })
+}
 module.exports={
-    addParty,fetchParty
+    addParty,fetchParty,givenParty,getGivenParty
 }

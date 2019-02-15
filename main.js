@@ -44,7 +44,12 @@ ipcMain.on('createJobType',routes.jobType_status.createJobType)
 ipcMain.on('fetchJobType',routes.jobType_status.fetchJobType)
 ipcMain.on('fetchGivenInvoice',routes.invoice.fetchGivenInvoice)
 ipcMain.on('createNewTransaction',routes.transaction.newTransaction)
-
+ipcMain.on('fetchPartywiseInvoiceDetail',routes.invoice.partywiseInvoiceDetail)
+ipcMain.on('fetchPartywisePayment',routes.transaction.partywiseTransaction)
+ipcMain.on('fetchGivenParty',routes.party.givenParty)
+ipcMain.on('getReportInvoiceOnly',routes.report.getInvoiceOnly)
+ipcMain.on('getReportPaymentOnly',routes.report.getPaymentOnly)
+ipcMain.on('getReportAll',routes.report.getReportAll)
 ipcMain.on('printPdf',function(event){
     const pdfPath=path.join(os.tmpdir(),'printPdf')
     const win=BrowserWindow.fromWebContents(event.sender)

@@ -2,6 +2,7 @@ const detail=require('../db/models').invoiceDetail
 const description=require('../db/models').invoiceDiscription
 const db=require('../db/models').db
 const party=require('../db/models').party
+const Op=require('sequelize').Op
 const createInvoice=function(event,requery){
     db.transaction(function(t){
         console.log(requery)
@@ -109,4 +110,18 @@ const fetchGivenInvoice=function(event,data){
         })
     })
 }
-module.exports={createInvoice,fetchInvoiceNo,getAllInvoiceDetail,fetchGivenInvoice}
+
+/*for Report Js***/
+const partywiseInvoiceDetail=function(requery){
+    console.log(requery)
+    return detail.findAll({
+        where:{
+            partyId:requery.partyId,
+            invoiceDate:{
+                [Op.between]:[requery.startDate,requery.endDate]
+            }
+        }
+    })
+    
+}
+module.exports={createInvoice,fetchInvoiceNo,getAllInvoiceDetail,fetchGivenInvoice,partywiseInvoiceDetail}

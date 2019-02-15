@@ -81,4 +81,10 @@ const upsertCompany=function(event,data){
                 })
         })
 }
-module.exports={getCompany,upsertCompany}
+/* for report.js***/
+const getMyCompany=function(){
+    console.log("req")
+    return company.findAll()
+        
+}
+module.exports={getCompany,upsertCompany,getMyCompany}
