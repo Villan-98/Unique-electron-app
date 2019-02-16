@@ -3,6 +3,7 @@
 
 $(function(){
     const {ipcRenderer}=require('electron')
+    const {remote}=require('electron')
     console.log("connected")
     const $btnSave=$('#btnSaveParty')
     const $partyName=$('#partyName')
@@ -31,7 +32,16 @@ $(function(){
                 contactNo:contactNo
             })
             ipcRenderer.once('addedParty',(event,data)=>{
-                console.log(data)
+                if(data.success)
+                {
+                 alert("New Party added successfullly!")
+                  
+
+                }
+                else{
+                    alert("Oops somthing went wrong!\n Please try again")
+                 }
+                 remote.getCurrentWindow().reload()
             })
         }
         else
