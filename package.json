@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/Villan-98/Unique#readme",
   "dependencies": {
-    "electron": "^4.0.1",
-    "mysql2": "^1.6.4",
-    "sequelize": "^4.42.0"
+    "electron": "^5.0.1",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.8.6"
   }
 }
