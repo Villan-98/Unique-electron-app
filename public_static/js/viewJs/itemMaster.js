@@ -13,7 +13,21 @@ $(function(){
                 console.log(items)
                 items.forEach((item)=>{
                     $ul_savedItem.append(`
-                <li class="list-group-item">${item.dataValues.itemName}</li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-8 h5">
+                                    <span class="pl-4">
+
+                                        ${item.dataValues.itemName}
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn-danger btn">
+                                        Delete
+                                    </button>
+                                <div>
+                            </div>
+                        </li>
                 `)
                 })
             }

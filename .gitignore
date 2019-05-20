@@ -3,5 +3,6 @@ node_modules/
 package-lock.json
 public_static/js/jquery_bootstrap/
 public_static/css/bootstrap
+public_static/fontawesome
 config.json
 temp.txt

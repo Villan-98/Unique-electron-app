@@ -13,8 +13,8 @@ let mainWindow
 app.on('ready',()=>{
     let mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
     mainWindow=new BrowserWindow({
-        width:mainScreenDimensions.width,
-        height:mainScreenDimensions.height
+        width:600,
+        height:600
     })
     //load html file
     mainWindow.loadURL(url.format({
