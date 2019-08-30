@@ -16,7 +16,8 @@ $(function(){
         $cpassword=$('#cpassword')
 
 
-    const $saveDetail=$('#saveDetail')
+    const $btn=$('button')
+    const {remote}=require('electron')
     const {ipcRenderer}=require('electron')
 
     ipcRenderer.send('getCompany',{message:"fetch company"})
@@ -43,45 +44,53 @@ $(function(){
 
         }
     })
-    $saveDetail.click((e)=>{
+    $btn.click((e)=>{
         e.preventDefault()
         console.log("button clicked")
-        let checked,sendUpsert=1;
-        if($chk_changePass.is(':checked'))
+        if(e.target.id==='saveDetail')
         {
-               if($newPassword.val()!==$cpassword.val())
-               {
-                   $.alert("Confirm Password should be same as new Password")
-                   sendUpsert=0;
-               }
-               checked=1
-
-        }
-        if(sendUpsert)
-        {
-
-            ipcRenderer.send("upsertCompany",{
-                companyName:$companyName.val(),
-                companyAddress:$companyAddress.val(),
-                gstRate:$gstRate.val(),
-                remark:$remark.val(),
-                term1:$term1.val(),
-                term2:$term2.val(),
-                companyGst:$companyGst.val(),
-                signatory:$signatory.val(),
-                contactNo1:$contactNo1.val(),
-                contactNo2:$contactNo2.val(),
-                checked:checked,
-                oldPassword:$oldPassword.val(),
-                cPassword:$cpassword.val(),
-                newPassword:$newPassword.val()
-
+            let checked,sendUpsert=1;
+            if($chk_changePass.is(':checked'))
+            {
+                   if($newPassword.val()!==$cpassword.val())
+                   {
+                       $.alert("Confirm Password should be same as new Password")
+                       sendUpsert=0;
+                   }
+                   checked=1
+    
+            }
+            if(sendUpsert)
+            {
+    
+                ipcRenderer.send("upsertCompany",{
+                    companyName:$companyName.val(),
+                    companyAddress:$companyAddress.val(),
+                    gstRate:$gstRate.val(),
+                    remark:$remark.val(),
+                    term1:$term1.val(),
+                    term2:$term2.val(),
+                    companyGst:$companyGst.val(),
+                    signatory:$signatory.val(),
+                    contactNo1:$contactNo1.val(),
+                    contactNo2:$contactNo2.val(),
+                    checked:checked,
+                    oldPassword:$oldPassword.val(),
+                    cPassword:$cpassword.val(),
+                    newPassword:$newPassword.val()
+    
+                })
+            }
+            ipcRenderer.once("upsertedCompany",(event,data)=>{
+                console.log(data)
             })
+    
         }
-        ipcRenderer.once("upsertedCompany",(event,data)=>{
-            console.log(data)
-        })
-
+        else if(e.target.id==='btnClose')
+        {
+            remote.getCurrentWindow().close()
+        }
+        
     })
 
 })

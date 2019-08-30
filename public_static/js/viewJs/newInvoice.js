@@ -1,6 +1,6 @@
 $(function(){
     //console.log("connected")
-    const {ipcRenderer}=require('electron')
+    const {ipcRenderer,remote}=require('electron')
     let $selectParty=$('#selectParty')
     let $selectParticular=$('.selectParticular')
     let $selectUnit=$('.selectUnit')
@@ -24,6 +24,10 @@ $(function(){
                     task:"printInvoice"
                 }) 
              }
+        }
+        else if(event.target.id==='btn_close')
+        {
+            remote.getCurrentWindow().close()
         }
     })
 

@@ -13,7 +13,7 @@ $(function(){
         console.log(e.target.id)
         if(e.target.id==="btnClose")
         {
-
+            remote.getCurrentWindow().close()
         }
         else if(e.target.id==="btnLogin")
         {

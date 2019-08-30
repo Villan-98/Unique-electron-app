@@ -1,5 +1,5 @@
 $(function(){
-    const{ipcRenderer}=require('electron')
+    const{ipcRenderer,remote}=require('electron')
     console.log("connected")
     const button=$('button')
     const inpAddJob=$('#inpAddJob')
@@ -82,6 +82,11 @@ $(function(){
         else if(e.target.id==='report')
         {
             openWin('report.html')
+        }
+        else if(e.target.id==='btnClose')
+        {
+            if(window.confirm("Do you really want to exit"))
+            remote.getCurrentWindow().close()
         }
     })
 })

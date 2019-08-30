@@ -1,7 +1,7 @@
 $(function(){
     const {ipcRenderer}=require('electron')
-    console.log("connected")
-    const $btn_addUnit=$('#addUnit'),
+    const {remote}=require('electron')
+    const $btn=$('button'),
         $unitName=$('#unitName'),
         $ul_storedUnit=$('#storedUnit')
     ipcRenderer.send('getUnit',{})
@@ -18,19 +18,26 @@ $(function(){
             })
         }
     })
-    $btn_addUnit.click((e)=>{
+    $btn.click((e)=>{
         e.preventDefault()
-        ipcRenderer.send('addUnit',{
-            unitName:$unitName.val()
-        })
-        console.log("ipc")
-        ipcRenderer.once('addedUnit',(event,data)=>{
-            console.log(data)
-           $ul_storedUnit.append(`
-                <li class="list-group-item">${data.unit.dataValues.unitName}</li>
-                `)
-
-        })
-
+        if(e.target.id==='addUnit')
+        {
+            ipcRenderer.send('addUnit',{
+                unitName:$unitName.val()
+            })
+            console.log("ipc")
+            ipcRenderer.once('addedUnit',(event,data)=>{
+                console.log(data)
+               $ul_storedUnit.append(`
+                    <li class="list-group-item">${data.unit.dataValues.unitName}</li>
+                    `)
+    
+            })    
+        }
+        else if(e.target.id==='btnClose')
+        {
+            remote.getCurrentWindow().close()
+        }
+       
     })
 })

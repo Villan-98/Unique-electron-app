@@ -1,16 +1,13 @@
 $(function(){
-        const {ipcRenderer}=require('electron')
-        console.log("connected")
-        const $btn_addItem=$('#addItem'),
+        const {ipcRenderer,remote}=require('electron')
+        const $btn=$('button'),
             $itemName=$('#itemName'),
             $ul_savedItem=$('#savedItem')
         ipcRenderer.send('getItem',{})
         ipcRenderer.once('gotItem',(event,data)=>{
-            console.log(data)
             if(data.data)
             {
                 let items=data.data
-                console.log(items)
                 items.forEach((item)=>{
                     $ul_savedItem.append(`
                         <li class="list-group-item">
@@ -22,7 +19,7 @@ $(function(){
                                     </span>
                                 </div>
                                 <div class="col-4">
-                                    <button class="btn-danger btn">
+                                    <button class="btn-warning btn">
                                         Delete
                                     </button>
                                 <div>
@@ -32,21 +29,28 @@ $(function(){
                 })
             }
         })
-        $btn_addItem.click((e)=>{
+        $btn.click((e)=>{
             e.preventDefault()
             console.log($itemName.val())
-            ipcRenderer.send('addItem',{
-                itemName:$itemName.val()
-            })
-            console.log("ipc")
-            ipcRenderer.once('addedItem',(event,data)=>{
-                $itemName.val('')
-                console.log(data)
-                $ul_savedItem.append(`
-                <li class="list-group-item">${data.item.dataValues.itemName}</li>
-                `)
-
-            })
-
+            if(e.target.id==='addItem')
+            {
+                ipcRenderer.send('addItem',{
+                    itemName:$itemName.val()
+                })
+                console.log("ipc")
+                ipcRenderer.once('addedItem',(event,data)=>{
+                    $itemName.val('')
+                    console.log(data)
+                    $ul_savedItem.append(`
+                    <li class="list-group-item">${data.item.dataValues.itemName}</li>
+                    `)
+    
+                })    
+            }
+            else if(e.target.id==='btnClose')
+            {
+                remote.getCurrentWindow().close()   
+            }
+            
         })
     })

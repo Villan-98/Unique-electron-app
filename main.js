@@ -13,8 +13,8 @@ let mainWindow
 app.on('ready',()=>{
     let mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
     mainWindow=new BrowserWindow({
-        width:600,
-        height:600
+        width:400,
+        height:400
     })
     //load html file
     mainWindow.loadURL(url.format({
@@ -69,6 +69,7 @@ ipcMain.on('printPdf',function(event){
 })
 ipcMain.on('checkCredential',routes.company.checkCredential)
 ipcMain.on('goingToHome',(()=>{
+    mainWindow.setSize(600,600)
     mainWindow.loadURL(url.format({
         pathname:path.join(__dirname,'public_static','mainWindow.html'),
         protocol:'file',
