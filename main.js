@@ -18,7 +18,7 @@ app.on('ready',()=>{
     })
     //load html file
     mainWindow.loadURL(url.format({
-        pathname:path.join(__dirname,'public_static','mainWindow.html'),
+        pathname:path.join(__dirname,'public_static/views','login.html'),
         protocol:'file',
         slashes:true
     }))
@@ -67,3 +67,11 @@ ipcMain.on('printPdf',function(event){
         })
     })
 })
+ipcMain.on('checkCredential',routes.company.checkCredential)
+ipcMain.on('goingToHome',(()=>{
+    mainWindow.loadURL(url.format({
+        pathname:path.join(__dirname,'public_static','mainWindow.html'),
+        protocol:'file',
+        slashes:true
+    }))
+}))

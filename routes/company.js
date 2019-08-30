@@ -16,6 +16,51 @@ const getCompany=function(event,data){
             })
         })
 }
+// for login
+const checkCredential=function(event,data)
+{
+    console.log("check password")
+    company.findOne({
+        where:{
+            id:1
+        }
+    })
+    .then((comData)=>{
+        if(comData)
+        {
+            if(comData.password===data.password)
+            {
+                event.sender.send('loginResult',{
+                    success:true,
+                    message:"logged in"
+
+                })
+            }
+            else
+            {
+                event.sender.send('loginResult',{
+                    success:false,
+                    message:"Wrong Credential"
+
+                })
+            }
+        }
+        else
+        {
+            event.sender.send('loginResult',{
+                success:false,
+                message:"Error on the server side"
+            })
+        }
+    })
+    .catch((err)=>{
+        console.log(err);
+        event.sender.send('loginResult',{
+            success:false,
+            message:"Error on the server side"
+        })
+    })
+}
 const upsertCompany=function(event,data){
     console.log("upsert")
     company.findOne({
@@ -87,4 +132,4 @@ const getMyCompany=function(){
     return company.findAll()
         
 }
-module.exports={getCompany,upsertCompany,getMyCompany}
+module.exports={getCompany,upsertCompany,getMyCompany,checkCredential}
