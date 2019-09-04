@@ -29,6 +29,10 @@ $(function(){
         {
             remote.getCurrentWindow().close()
         }
+        else if(event.target.id==='btn_newInvoice')
+        {
+            remote.getCurrentWindow().reload()
+        }
     })
 
     var optionItem,optionUnit
