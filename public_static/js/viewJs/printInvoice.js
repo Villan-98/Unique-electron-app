@@ -1,13 +1,16 @@
 $(function(){
     console.log("connected")
+    var d = new Date();
+    var n = d.getTime();
+    console.log(n)
     const {ipcRenderer}=require('electron')
     const $header=$('#header')
     const $footer=$('#footer')
     const $body=$('#body')
     var company
     ipcRenderer.on('takeInvoiceNo',(event,command)=>{
-        console.log("takeInvoice")
-        console.log(command)
+        // console.log("takeInvoice")
+        // console.log(command)
         task=command.split('-')[0]
         invoiceNumber=command.split('-')[1]
         if(task==='printInvoice')
@@ -67,11 +70,11 @@ $(function(){
                 invoiceDetailId:invoiceNumber
             })
             ipcRenderer.once('fetchedGivenInvoice',(event,data)=>{
-                console.log(data)
-            console.log(data.party)
-                detail=data.data.detail.dataValues
+                // console.log(data)
+                detail=data.data.detail[0]
                 desc=data.data.description
-                console.log(desc)
+                // console.log(desc)
+                // console.log(detail)
             $body.empty().append(`
                             
                             <div class="row">
@@ -126,7 +129,6 @@ $(function(){
 
                 
                     data=data.data
-                    console.log(data)
                     desc.forEach((des)=>{
                         des=des.dataValues
                             $('#tableDetail').append(`
@@ -143,8 +145,7 @@ $(function(){
                             <td class="p-1">${des.amount}  </td>
                             </tr>
                         `)
-                    })
-                console.log(company)
+                    }) 
                 $body.append(`
                             <table class="table table-bordered mb-1">
                                 <thead >
@@ -162,17 +163,17 @@ $(function(){
                                                 <h6 class="m-0">GST on Reverse Charges</h6>
                                         </th>
                                         <th scope="col-3 pb-0">
-                                        <h6 class="m-0"> ${detail.gstTotal}</h6>
+                                        <h6 class="m-0"> ${detail.dataValues.gstTotal}</h6>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableDetail">
                                     <tr>
                                         <td class="p-1"></td>
-                                        <td class="p-1">${detail.gstTotal/2}</td>
-                                        <td class="p-1">${detail.gstTotal/2}</td>
+                                        <td class="p-1">${detail.dataValues.gstTotal/2}</td>
+                                        <td class="p-1">${detail.dataValues.gstTotal/2}</td>
                                         <td class="p-1">Grand Total</td>
-                                        <td class="p-1">${detail.totalAmount}</td>
+                                        <td class="p-1">${detail.dataValues.totalAmount}</td>
                                     </tr>
                                 </tbody>
                             </table>

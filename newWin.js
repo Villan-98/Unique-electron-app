@@ -20,21 +20,25 @@ const createWin=function(e,data){
     else
     {
         newWin=new BrowserWindow(({
-            title:data.windowName
+            title:data.windowName,
         }))
     }
 
     newWin.loadURL(url.format({
         pathname:path.join(__dirname,'public_static/views',data.windowName),
         protocol:'file:',
-        slashes:true
+        slashes:true,
     }))
-        console.log("new window")
-        console.log(data.task)
-        newWin.webContents.on('did-finish-load', () => {
+        if(data.task==='printInvoice')
+        {
+            newWin.webContents.on('did-frame-finish-load', () => {
+            var d = new Date();
+            var n = d.getTime();
+            console.log(n)
             console.log("skdfja")
             console.log(data.invoiceNo)
             newWin.webContents.send('takeInvoiceNo',`${data.task}-${data.invoiceNo}`)
-          })
+          })   
+        }
 }
 module.exports={createWin}

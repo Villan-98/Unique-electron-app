@@ -72,7 +72,7 @@ const fetchInvoiceNo=function(event,data){
 }
 const fetchGivenInvoice=function(event,data){
     console.log("route",data)
-    detail.find({
+    detail.findAll({
         where:{
             id:data.invoiceDetailId
         },
