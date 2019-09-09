@@ -23,7 +23,7 @@ const getInvoiceOnly=function(event,data){
     })
     .catch(err=>{
         console.log(err)
-        event.sender.send('gotReportInvoiceOnly',{
+        event.reply('gotReportInvoiceOnly',{
             data:null,
             err:err,
             success:false

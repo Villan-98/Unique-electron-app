@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Invoice</title>
+
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row m-3 pb-3">
+            <div class="col">
+                <h2 class="text-center">View Invoice</h2>
+            </div>
+        </div>
+        <div class="row m-3">
+            <form>
+                <div class="my-4">
+                    <div class="form-group row">
+                        <label for="invoiceNo" class="col-1 col-form-label">Invoice No.</label>
+                        <div class="col-2">
+                            <input type="text"  readonly class="form-control"  id="invoiceNo">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="invoiceDate" class="col-1 col-form-label">Invoice Date</label>
+                        <div class="col-2">
+                            <input type="date"  class="form-control"   id="invoiceDate">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="selectParty" class="col-1 col-form-label">Party Name</label>
+                        <div class="col-2">
+                            <select class="form-control" id="selectParty">
+                                <option>Select Party</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="remark" class="col-1 col-form-label">Remark</label>
+                        <div class="col-2">
+                            <input type="text"   class="form-control" id="remark">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="row mt-4 text-center ">
+                    <div class="col-1 p-0 mr-3">
+                        <input type="text" readonly class="form-control-plaintext small" value="Particular">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Clr">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Qty">
+                    </div>
+
+                    <div class="col-1 ml-3 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Unit">
+                    </div>
+
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Your Challan No">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="Our Challan No.">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" class="form-control-plaintext small"value="HSN Code">   
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext  small" value="Rate">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small" value="PerQty/Clr">
+                    </div>
+                    <div class="col-1 p-0">
+                        <input type="text" readonly class="form-control-plaintext small " value="Amount">
+                    </div>
+                </div>
+
+                <div  id="description">
+                    
+                </div>
+                <div class="row text-center pt-3">
+                    <div class="col ">
+                        <label for="conveyanceCharge" class="col form-label">Conveyance Charge</label>
+                    </div>
+                    <div class="col">
+                        <label for="iGst" class="col form-label">I GST</label>
+                    </div>
+                    <div class="col">
+                        <label for="cGst" class="col form-label">C GST</label>
+                    </div>
+
+                    <div class="col">
+                        <label for="gst" class="col form-label">Total GST</label>
+                    </div>
+                    <div class="col">
+                        <label for="grandTotal" class="col form-label">Grand Total</label> 
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col">
+                
+                        <input type="float"  id="conveyanceCharge" class="form-control" value=0 placeholder="Conveyance Charge"> 
+                    </div>
+                    <div class="col">
+                        <input type="float"  id="iGst" class="form-control" placeholder="IGST"> 
+                    </div>
+                    <div class="col">
+                        <input type="float"  id="cGst" class="form-control" placeholder="CGST"> 
+                    </div>
+
+                    <div class="col">
+                        <input type="float"  id="gst" class="form-control" placeholder="GST"> 
+                    </div>
+                    <div class="col">
+                        <input type="float"  id="grandTotal" class="form-control" placeholder="Grand Total"> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <button class="btn btn-success pl-3" id="btn_saveInvoice"> Save Invoice</button>
+                    </div>
+
+                    <div class="col">
+
+                        <button class="btn btn-info " id="btn_printInvoice"> Print Invoice</button>
+                    </div>
+                    <div class="col">
+
+                        <button class="btn btn-danger" id="btn_close"> Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+
+<script src="../js/jquery_bootstrap/jquery.js"></script>
+<script src="../js/viewJs/savedInvoice.js"></script>
+<script src="../js/jquery_bootstrap/popper.js"></script>
+<script src="../js/jquery_bootstrap/bootstrap.js"></script>
+<script>
+  if (window.module)
+     module = window.module;
+</script>
+
+</body>
+</html>

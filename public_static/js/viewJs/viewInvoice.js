@@ -1,9 +1,10 @@
 $(function(){
     console.log("connected")
     const detailList=$('#detail')
-    const btnClose=$('#close')
+    const $btn=$('button')
     const {ipcRenderer}=require('electron')
     const {remote}=require('electron')
+    let invoiceNo
     ipcRenderer.send('getAllInvoiceDetail')
     ipcRenderer.once('gotAllInvoiceDetail',(event,data)=>{
         //console.log(data)
@@ -36,7 +37,7 @@ $(function(){
                             ${data.totalAmount}
                         </div>
                         <div class="col-1 text-right">
-                            <button class="btn btn-info"> Edit</button>
+                            <button class="btn btn-info btnEdit" id=${data.id} > Edit</button>
                         </div>
                     </div>
                 </li>
@@ -61,8 +62,37 @@ $(function(){
             `
         )
     })
-    btnClose.click((event)=>{
-        var window = remote.getCurrentWindow();
-        window.close()
+    $btn.click((e)=>{
+        console.log(e)
+        if(e.target.id==='btnClose')
+        {
+            let window = remote.getCurrentWindow();
+            window.close()
+        }
+    })
+
+    ipcRenderer.on ('sendInvoiceNo', (event, message) => { 
+    let window2 = remote.getGlobal ('savedInvoiceWindow');
+            if (window2) 
+            {
+                window2.webContents.send ('takeInvoiceNumber', {
+                invoiceNo:invoiceNo
+                })
+            }
+            else
+            {
+                console.log("sorry")
+            }
+             
+             
+         });
+    $("body").on("click",".btnEdit",function(event){
+        console.log(event.target.id)
+        invoiceNo=event.target.id
+        ipcRenderer.send('openNewWindow',{
+            invoiceNo:event.target.id,
+            windowName:'savedInvoice.html',
+            task:'viewSavedInvoice'
+        })
     })
 })
