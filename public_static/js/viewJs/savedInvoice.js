@@ -14,7 +14,7 @@ $(function(){
     let task
     var sno=0
     var optionItem,optionUnit
-    let window2 = remote.getGlobal ('view');
+    let window2 = remote.getGlobal ('viewInvoiceWindow');
     if (window2) window2.webContents.send ('sendInvoiceNo', "Message from Window 1")
     ipcRenderer.once('takeInvoiceNumber',(event,data)=>
     {
