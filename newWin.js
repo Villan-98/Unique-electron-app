@@ -87,17 +87,7 @@ const createWin=function(e,data){
     {
         console.log("sorry repeated windows are not allowed")
     }
-    console.log(data)
-    if(data.task==='printInvoice')
-    {
-        newWin.webContents.on('did-frame-finish-load', () => {
-        var d = new Date();
-        var n = d.getTime();
-        console.log(n)
-        console.log("skdfja")
-        console.log(data.invoiceNo)
-        newWin.webContents.send('takeInvoiceNo',`${data.task}-${data.invoiceNo}`)
-        })   
-    }
+    //console.log(data)
+    
 }
 module.exports={createWin}

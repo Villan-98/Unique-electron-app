@@ -3,18 +3,20 @@ $(function(){
     var d = new Date();
     var n = d.getTime();
     console.log(n)
-    const {ipcRenderer}=require('electron')
+    const {ipcRenderer,remote}=require('electron')
     const $header=$('#header')
     const $footer=$('#footer')
     const $body=$('#body')
     var company
-    ipcRenderer.on('takeInvoiceNo',(event,command)=>{
+    let savedInvoiceWindow = remote.getGlobal ('savedInvoiceWindow');
+    if (savedInvoiceWindow) savedInvoiceWindow.webContents.send ('sendInvoiceNo', "Message from printInvoice")
+    let newInvoiceWindow = remote.getGlobal ('newInvoiceWindow');
+    if (newInvoiceWindow) newInvoiceWindow.webContents.send ('sendInvoiceNo', "Message from printInvoice")
+    ipcRenderer.on('takeInvoiceNo',(event,data)=>{
         // console.log("takeInvoice")
         // console.log(command)
-        task=command.split('-')[0]
-        invoiceNumber=command.split('-')[1]
-        if(task==='printInvoice')
-        {
+        invoiceNumber=data.invoiceNumber
+        
             console.log("hi")
             ipcRenderer.send('getCompany',{message:"fetch company"})
             ipcRenderer.once('gotCompany',(event,data)=>{
@@ -182,7 +184,7 @@ $(function(){
                 
             })
             
-        }
+        
     })
     $('#printInvoice').click((event)=>{
         event.preventDefault()

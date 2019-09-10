@@ -8,7 +8,13 @@ $(function(){
     const $buttonTag=$('button')
     const $inputTag=$('input')
     let printFlag=0
-
+    
+    ipcRenderer.on('sendInvoiceNo',(event,data)=>{
+        let printInvoiceWindow=remote.getGlobal('printInvoiceWindow')
+        if(printInvoiceWindow) printInvoiceWindow.webContents.send("takeInvoiceNo",{
+            invoiceNumber:$(`#invoiceNo`).val()
+        })
+    })
     $buttonTag.click((event)=>{
         event.preventDefault()
         if(event.target.id==='btn_printInvoice')
