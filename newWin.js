@@ -32,15 +32,18 @@ const createWin=function(e,data){
     console.log("here")
     console.log(data)
     mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
-    
+    let width=800
+    let height=700
     if(addPartyWindow===null && data.windowName==='addParty.html')
     {
-        addPartyWindow=windowHelper(data.windowName,mainScreenDimensions.width,mainScreenDimensions.height)
+        addPartyWindow=windowHelper(data.windowName,width,height)
         addPartyWindow.on('closed',()=>{addPartyWindow=null})
     }
     else if(itemMasterWindow===null && data.windowName==='itemMaster.html')
     {
-        itemMasterWindow=windowHelper(data.windowName,mainScreenDimensions.width,mainScreenDimensions.height)
+        height=900
+        width=800
+        itemMasterWindow=windowHelper(data.windowName,width,height)
         itemMasterWindow.on('closed',()=>{itemMasterWindow=null})
     }
     else if(myCompanyWindow===null && data.windowName==='myCompany.html')
@@ -60,7 +63,7 @@ const createWin=function(e,data){
     }
     else if(reportWindow==null && data.windowName==='report.html')
     {
-        reportWindow=windowHelper(data.windowName,mainScreenDimensions.width,mainScreenDimensions.height)
+        reportWindow=windowHelper(data.windowName,width,height)
         reportWindow.on('closed',()=>{reportWindow=null})
     }
     else if(savedInvoiceWindow===null && data.windowName==='savedInvoice.html')
@@ -70,12 +73,12 @@ const createWin=function(e,data){
     }
     else if(transactionWindow===null && data.windowName==='transaction.html')
     {
-        transactionWindow=windowHelper(data.windowName,mainScreenDimensions.width,mainScreenDimensions.height)
+        transactionWindow=windowHelper(data.windowName,width,height)
         transactionWindow.on('closed',()=>{transactionWindow=null})
     }   
     else if(unitMasterWindow===null && data.windowName==='unitMaster.html')
     {
-        unitMasterWindow=windowHelper(data.windowName,mainScreenDimensions.width,mainScreenDimensions.height)
+        unitMasterWindow=windowHelper(data.windowName,width,height)
         unitMasterWindow.on('closed',()=>{unitMasterWindow=null})
     } 
     else if( viewInvoiceWindow===null && data.windowName==='viewInvoice.html')
