@@ -32,13 +32,12 @@ $(function(){
                 ipcRenderer.once('loginResult',(event,data)=>{
                     if(data.success)
                     {
-                        console.log("hahaha")
-                    ipcRenderer.send('goingToHome',{message:"successfully logged in"})
+                        ipcRenderer.send('goingToHome',{message:"successfully logged in"})
 
                     }
                     else{
                         alert(data.message)
-                        remote.getCurrentWindow().reload()
+                        $password.val("");
                     }
                 })
             }
