@@ -16,11 +16,14 @@ global.viewInvoiceWindow=null
 let mainScreenDimensions
 const windowHelper=function(title,width,height)
 {
-    newWin=new BrowserWindow(({
+    newWin=new BrowserWindow({
             title:title||"xyz",
             width:width,
-            height:height
-        }))
+            height:height,
+            webPreferences:{
+            nodeIntegration:true
+            }
+        })
     newWin.loadURL(url.format({
         pathname:path.join(__dirname,'public_static/views',title),
         protocol:'file:',

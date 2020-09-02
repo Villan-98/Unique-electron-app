@@ -14,7 +14,10 @@ app.on('ready',()=>{
     let mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
     mainWindow=new BrowserWindow({
         width:400,
-        height:400
+        height:400,
+        webPreferences:{
+            nodeIntegration:true
+        }
     })
     //load html file
     mainWindow.loadURL(url.format({
