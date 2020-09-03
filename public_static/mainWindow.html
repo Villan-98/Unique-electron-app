@@ -6,55 +6,73 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-<body>
-<div class="container">
+<style>
+  .funButton{
+    background-color: white;
+    border-color: #E9967A
+  }
+  .padder{
+    display: inline-block;
+    margin:20px ;
+}
+</style>
+<body style="background-color: #FFEBCD">
+<div class="container" >
+  <div class="padder">
+  </div>
+  <h3 class="text-center"> Home</h3>
     <div class="row">
-        <div class="col">
-            <div class="row">
+        <div class=" offset-1 col">
+            <div class="row my-4">
 
-                <div class="col-6">
-                    <button class="btn btn-primary" id="addParty"> Add Party</button>
+              <div class="col">
+                    <button class="btn py-3 mr-3 funButton" id="addParty"  > </button>Add Party
                 </div>
-                <div class="col-6">
-                    <button class="btn btn-primary" id="myCompany">My Company</button>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-6">
-                    <button class="btn btn-primary" id="unitMaster"> Unit Master</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-primary" id="itemMaster"> Item Master</button>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-6">
-                    <button class="btn btn-primary" id="newInvoice"> New Invoice</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-primary" id="viewInvoice"> View Invoice</button>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="col-6">
-                    <button type="button"class="btn btn-primary" id="jobType" data-toggle="modal" data-target="#myModal"> Job Type</button>
-                </div>
-                <div class="col-6">
-                    <button type="button"class="btn btn-primary" id="transaction">Transaction</button>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-6">
-                    <button type="button"class="btn btn-primary" id="report"> Report</button>
-                </div>
-            </div>
-            <div class="row mt-4 pt-4">
-                <div class ="col-5">
-
-                </div>
+              </div>
+              <div class="row my-4">
                 <div class="col">
-                    <button type="button" class="btn btn-danger" id="btnClose">Close</button>
+                    <button class="btn py-3 funButton mr-3" id="myCompany"style="background-color: white"></button>My Company
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <button class="btn py-3 funButton mr-3" id="unitMaster"style="background-color: white"> </button>Unit Master
+                </div>
+            </div>
+
+            <div class="row my-4">
+              <div class="col">
+                    <button class="btn py-3 funButton mr-3 funButton" id="itemMaster"> </button>Item Master
+              </div>
+            </div>
+        </div>
+        <div class="offset-1 col">
+            <div class="row my-4">
+                <div class="col">
+                    <button class="btn py-3 funButton mr-3" id="newInvoice"style="background-color: white"> </button>New Invoice
+                </div>
+
+              </div>
+              <div class="row my-4">
+                <div class="col">
+                    <button class="btn py-3 funButton mr-3" id="viewInvoice"style="background-color: white"> </button>View Invoice
+                </div>
+            </div>
+
+            <div class="row my-4">
+                <div class="col">
+                    <button type="button"class="btn py-3 funButton mr-3" id="jobType" data-toggle="modal" data-target="#myModal"style="background-color: white"> </button>Job Type
+                </div>
+
+              </div>
+              <div class="row my-4">
+                <div class="col">
+                    <button type="button"class="btn py-3 funButton mr-3" id="transaction"></button>Transaction
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col">
+                    <button type="button"class="btn py-3 funButton mr-3" id="report"> </button>Report
                 </div>
             </div>
             <!-- Modal -->
@@ -98,6 +116,13 @@
             
         </div>
 
+    </div>
+    <div class="row">
+      <div class="offset-4 col">
+
+        <button type="button" class="btn  btn-danger" id="btnClose">Close</button>
+              
+      </div>
     </div>
 </div>
 <script>
