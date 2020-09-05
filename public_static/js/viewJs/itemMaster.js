@@ -10,7 +10,7 @@ $(function(){
                 let items=data.data
                 items.forEach((item)=>{
                     $ul_savedItem.append(`
-                        <li class="list-group-item">
+                        <li class="list-group-item mt-1">
                             <div class="row">
                                 <div class="col-8 h5">
                                     <span class="pl-4">
