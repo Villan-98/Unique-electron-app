@@ -35,10 +35,12 @@ const createWin=function(e,data){
     console.log("here")
     console.log(data)
     mainScreenDimensions = require('electron').screen.getPrimaryDisplay().size;
-    let width=800
+    let width=600
     let height=700
     if(addPartyWindow===null && data.windowName==='addParty.html')
     {
+        width=500
+        height=500
         addPartyWindow=windowHelper(data.windowName,width,height)
         addPartyWindow.on('closed',()=>{addPartyWindow=null})
     }
