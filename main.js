@@ -53,6 +53,7 @@ ipcMain.on('fetchGivenParty',routes.party.givenParty)
 ipcMain.on('getReportInvoiceOnly',routes.report.getInvoiceOnly)
 ipcMain.on('getReportPaymentOnly',routes.report.getPaymentOnly)
 ipcMain.on('getReportAll',routes.report.getReportAll)
+ipcMain.on('deleteItem',routes.item.deleteItem);
 ipcMain.on('printPdf',function(event){
     const pdfPath=path.join(os.tmpdir(),'printPdf')
     const win=BrowserWindow.fromWebContents(event.sender)

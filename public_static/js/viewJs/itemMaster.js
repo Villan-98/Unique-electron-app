@@ -1,4 +1,46 @@
 $(function(){
+        let makeList=function(data)
+        {
+            let items=data
+            console.log(items);
+            $ul_savedItem.empty();
+            items.forEach((item)=>{
+                $ul_savedItem.append(`
+                    <li class="list-group-item mt-1">
+                        <div class="row">
+                            <div class="col-8 h5">
+                                <span class="pl-4">
+
+                                    ${item.dataValues.itemName}
+                                </span>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn-warning btn delBut" id="${item.dataValues.id}">
+                                    Delete
+                                </button>
+                            <div>
+                        </div>
+                    </li>
+            `)
+            })
+        }
+         $("body").on('click','.delBut',function(event){
+                console.log(event.target.id);
+                if(confirm("are you sure you want to delete an item"))
+                {
+                    let buttonId=event.target.id;
+                    ipcRenderer.send('deleteItem',{
+                        itemId:buttonId
+                    })
+                    ipcRenderer.once('deletedItem',(event,data)=>{
+                        console.log(data);
+                        if(data)
+                        {
+                            makeList(data.data);
+                        }
+                    })   
+                }
+            })
         const {ipcRenderer,remote}=require('electron')
         const $btn=$('button'),
             $itemName=$('#itemName'),
@@ -7,26 +49,7 @@ $(function(){
         ipcRenderer.once('gotItem',(event,data)=>{
             if(data.data)
             {
-                let items=data.data
-                items.forEach((item)=>{
-                    $ul_savedItem.append(`
-                        <li class="list-group-item mt-1">
-                            <div class="row">
-                                <div class="col-8 h5">
-                                    <span class="pl-4">
-
-                                        ${item.dataValues.itemName}
-                                    </span>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn-warning btn">
-                                        Delete
-                                    </button>
-                                <div>
-                            </div>
-                        </li>
-                `)
-                })
+                makeList(data.data);
             }
         })
         $btn.click((e)=>{
@@ -42,7 +65,20 @@ $(function(){
                     $itemName.val('')
                     console.log(data)
                     $ul_savedItem.append(`
-                    <li class="list-group-item">${data.item.dataValues.itemName}</li>
+                    <li class="list-group-item mt-1"><div class="row">
+                                <div class="col-8 h5">
+                                    <span class="pl-4">
+
+                                        ${data.item.dataValues.itemName}
+                                    </span>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn-warning btn delBut" id="${data.item.dataValues.id}">
+                                        Delete
+                                    </button>
+                                <div>
+                            </div>
+                        </li>
                     `)
     
                 })    

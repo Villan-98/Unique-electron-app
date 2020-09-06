@@ -38,4 +38,38 @@ const getItem=function(event,data)
             })
         })
 }
-module.exports={addItem,getItem}
+const deleteItem=function(event,data)
+{
+    item.destroy({
+        where:{
+            id:data.itemId
+        }
+    })
+    .then(()=>{
+        item.findAll()
+        .then((allItem)=>{
+
+        event.sender.send('deletedItem',{
+                success:true,
+                data:allItem,
+                error:null
+            })  
+        })
+        .catch((err)=>{
+            event.sender.send('deletedItem',{
+                success:true,
+                data:null,
+                error:err
+            })
+        })
+    })
+    .catch((err)=>{
+        console.log(err);
+        event.sender.send('deletedItem',{
+                success:false,
+                data:null,
+                error:err
+            })
+    })
+}
+module.exports={addItem,getItem,deleteItem}
