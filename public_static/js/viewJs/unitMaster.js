@@ -3,7 +3,7 @@ $(function(){
     const {remote}=require('electron')
     const $btn=$('button'),
         $unitName=$('#unitName'),
-        $ul_storedUnit=$('#storedUnit')
+        $ul_storedUnit=$('#savedUnit')
     ipcRenderer.send('getUnit',{})
     ipcRenderer.once('gotUnit',(event,data)=>{
         console.log(data)
